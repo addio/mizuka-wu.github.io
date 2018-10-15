@@ -15,7 +15,7 @@ social:
   twitter: 
   instagram: 
   bilibili: https://space.bilibili.com/1383044/
-  rss: 
+  rss: /atom.xml
 # friends
 friends:
   friendA: //www.baidu.com
@@ -37,7 +37,7 @@ site_header_image: '/intro/index-bg.jpg'
 # post haeder image
 post_header_image: '/intro/post-bg.jpg'
 # 404 image
-_404_image: '/intro/404-bg.jpg'
+_404_image: 'https://source.unsplash.com/random'
 
 # ========== Search ========== #
 algolia_search:
@@ -45,9 +45,9 @@ algolia_search:
   hits:
     per_page: 10 # 每页的结果数
   labels:
-    input_placeholder: Search for Posts # 搜索栏 placeholder
-    hits_empty: "We did not find any results for the search: ${query}" # 搜索结果提示
-    hits_stats: "${hits} results found in ${time} ms" # 搜索无结果的提示
+    input_placeholder: 搜索模式，启动！ # 搜索栏 placeholder
+    hits_empty: "什么都没找到呢～" # 搜索结果提示
+    hits_stats: "搜索到了${hits}条结果！ （${time} ms）" # 搜索无结果的提示
 
 # ========== Comment ========== #
 # Fill in the field to enable the corresponding comment plugin
