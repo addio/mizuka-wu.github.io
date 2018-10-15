@@ -31,7 +31,7 @@ SEO_title: 水华的博客
 # main title
 main_title: 水华的博客
 # subtitle
-subtitle: 世界上一成不变的东西，只有“任何事物都是在不断变化的”这条真理
+subtitle: 这年头决定命运的，是情报
 # site haeder image
 site_header_image: '/intro/index-bg.jpg'
 # post haeder image
@@ -69,7 +69,7 @@ comment:
 
 # ========== Analytics ========== #
 # enable Busuanzi analytics
-busuanzi: true
+busuanzi: false
 # fill in pv or uv
 busuanzi_pv_or_uv: 'pv'
 # custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
