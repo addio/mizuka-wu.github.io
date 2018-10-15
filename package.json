@@ -1,7 +1,13 @@
 {
   "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mizuka-wu/mizuka-wu.github.io.git"
+  },
+  "scripts": {
+    "deploy": "hexo deploy"
+  },
   "hexo": {
     "version": "3.7.1"
   },
