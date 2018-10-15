@@ -54,7 +54,7 @@ algolia_search:
 # If you want to add other comment plugin, edit in "custom.ejs"
 comment:
   # Livere  site: https://livere.com/
-  livere_uid: MTAyMC80MDMwNi8xNjgzMw==
+  livere_uid: 
   # Disqus  site: https://disqus.com/
   disqus_shortname: 
   # Changyan  site: http://changyan.kuaizhan.com/
@@ -63,9 +63,9 @@ comment:
   # Youyan  site: http://www.uyan.cc/
   youyan_uid: 
   # Valine  site: https://valine.js.org/
-  valine_appId: 
-  valine_appKey: 
-  valine_placeHolder: 
+  valine_appId: 0eAmMMUxqe9alLwt4KzftCnv-gzGzoHsz
+  valine_appKey: PfYhgvohzSQStMaJHaneYXq9
+  valine_placeHolder: 给我个留言吧！
 
 # ========== Analytics ========== #
 # enable Busuanzi analytics
