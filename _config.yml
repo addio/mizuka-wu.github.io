@@ -100,4 +100,4 @@ deploy:
   type: git
   repo: git@github.com:mizuka-wu/mizuka-wu.github.io.git  #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
   branch: master #published
-  message: [Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}]  #leave this blank
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"  #leave this blank
