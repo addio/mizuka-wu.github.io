@@ -94,6 +94,13 @@ jsonContent:
     categories: true
     tags: true
 
+algolia:
+  applicationID: '30Y4O0O0A2'
+  apiKey: '16bdbd3e031ecae9ae00c3626d819d64'
+  indexName: 'Blog'
+  chunkSize: 5000
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
