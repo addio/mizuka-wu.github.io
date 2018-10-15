@@ -6,7 +6,7 @@
     "url": "git@github.com:mizuka-wu/mizuka-wu.github.io.git"
   },
   "scripts": {
-    "deploy": "hexo deploy"
+    "deploy": "hexo deploy -g"
   },
   "hexo": {
     "version": "3.7.1"
