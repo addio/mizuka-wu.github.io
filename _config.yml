@@ -107,6 +107,11 @@ offline:
   - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
   stripPrefix: public
   verbose: false
+  runtimeCaching:
+    - urlPattern: /*
+      handler: cacheFirst
+      options:
+        origin: mizuka-blog.oss-cn-shanghai.aliyuncs.com
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
