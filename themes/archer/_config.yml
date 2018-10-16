@@ -10,7 +10,7 @@ social:
   email: mizuka.wu@outlook.com
   github: //github.com/mizuka-wu
   # wechat and qq should be a path of qr-code image
-  wechat: /assets/example_qr.png
+  wechat: https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/example_qr.png
   zhihu: 
   twitter: 
   instagram: 
