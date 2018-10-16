@@ -106,7 +106,7 @@ offline:
   staticFileGlobs:
   - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
   stripPrefix: public
-  verbose: true
+  verbose: false
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

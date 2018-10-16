@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npx hexo clean && npx hexo generate",
     "index": "export HEXO_ALGOLIA_INDEXING_KEY='668e8865f5d99b1e6d6e5f8dbb3ee25d' && npx hexo algolia",
-    "deploy": "npx hexo clean && npx hexo deploy -g"
+    "deploy": "npm run start && npx hexo deploy"
   },
   "hexo": {
     "version": "3.7.1"
