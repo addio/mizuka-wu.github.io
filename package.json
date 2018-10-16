@@ -6,6 +6,7 @@
     "url": "git@github.com:mizuka-wu/mizuka-wu.github.io.git"
   },
   "scripts": {
+    "start": "npx hexo clean && npx hexo generate",
     "index": "export HEXO_ALGOLIA_INDEXING_KEY='668e8865f5d99b1e6d6e5f8dbb3ee25d' && npx hexo algolia",
     "deploy": "npx hexo deploy -g"
   },
@@ -22,6 +23,7 @@
     "hexo-generator-index": "^0.2.1",
     "hexo-generator-json-content": "^3.0.1",
     "hexo-generator-tag": "^0.2.0",
+    "hexo-offline": "^1.0.0",
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
