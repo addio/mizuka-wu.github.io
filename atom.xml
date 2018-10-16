@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mizuka.top/"/>
-  <updated>2018-10-16T02:41:23.337Z</updated>
+  <updated>2018-10-16T06:17:13.393Z</updated>
   <id>https://www.mizuka.top/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>教你如何构建Mojave动态壁纸</title>
+    <link href="https://www.mizuka.top/2018/10/16/%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BAMojave%E5%8A%A8%E6%80%81%E5%A3%81%E7%BA%B8/"/>
+    <id>https://www.mizuka.top/2018/10/16/教你如何构建Mojave动态壁纸/</id>
+    <published>2018-10-16T05:46:10.000Z</published>
+    <updated>2018-10-16T06:17:13.393Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Mojave动态壁纸"><a href="#Mojave动态壁纸" class="headerlink" title="Mojave动态壁纸"></a>Mojave动态壁纸</h1><blockquote><p>OSX Mojave发布带来了黑暗模式，众多改进，其中一个功能就在能够根据你当地所处的时间，动态切换系统背景</p></blockquote><h2 id="动态壁纸"><a href="#动态壁纸" class="headerlink" title="动态壁纸"></a>动态壁纸</h2><p>大家都知道，apple得益于自身的封闭特性，拥有众多自身所特有的特殊格式，这次的动态背景其实就是依托于背后的<strong>Heic</strong>格式</p><h3 id="Heic格式"><a href="#Heic格式" class="headerlink" title="Heic格式"></a>Heic格式</h3><p>如果你使用过apple的live photo 就会发现其导出的格式就是heic, 这其实就是一个类似一个短视频的格式，利用它， 我们将多张照片以及他们的时区等信息直接整合，输出成一张heic图片，就能提供给Mojave使用了</p><h2 id="开始构建吧"><a href="#开始构建吧" class="headerlink" title="开始构建吧"></a>开始构建吧</h2><h3 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h3><p>关于工具，已经有人在github上开源了相关的构建脚本，不过请注意，只有Mac可以使用哦   <a href="https://github.com/mczachurski/wallpapper" target="_blank" rel="noopener">工具地址</a><br><img src="https://github.com/mczachurski/wallpapper/raw/master/Images/wallpaper.png" alt=""></p><h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><h4 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h4><p>工具有两种安装模式 <strong>Homebrew</strong> 以及 github安装，当然 如果你新装了系统，有些Xcode功能需要重新安装, 请先安装xcode-select并且输入<figure class="highlight plain"><figcaption><span>xcode-select -s</span><a href="/Applications/Xcode.app/Contents/Developer">```</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##### Homebrew</span><br><span class="line">打开你的命令行输入</span><br><span class="line">```bash</span><br><span class="line">brew tap mczachurski/wallpapper</span><br><span class="line">brew install wallpapper</span><br></pre></td></tr></table></figure></p><h5 id="github安装"><a href="#github安装" class="headerlink" title="github安装"></a>github安装</h5><p>打开你的命令行，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mczachurski/wallpapper.git</span><br><span class="line"><span class="built_in">cd</span> wallpapper</span><br><span class="line">swift build --configuration release</span><br><span class="line">sudo cp .build/x86_64-apple-macosx10.10/release/wallpapper /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure></p><p>注意 如果你用的swift4.1请编辑Package.swift</p><h4 id="测试工具是否可用"><a href="#测试工具是否可用" class="headerlink" title="测试工具是否可用"></a>测试工具是否可用</h4><p>和大多数软件一样<figure class="highlight plain"><figcaption><span>-h```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后你会看到</span><br></pre></td></tr></table></figure></p><p>wallpapper: [command_option] -i inputFile<br>Command options are:<br> -h            show this message and exit<br> -o            output file name (default is ‘output.heic’)<br> -i            input file name, json file with wallpaper description<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 构建</span><br><span class="line">前面所题，我们需要配置一些照片，并且配置每张照片的信息，所以新建一个json文件，内容类似</span><br><span class="line">```json</span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;1.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: true,</span><br><span class="line">    &quot;isForLight&quot;: true,</span><br><span class="line">    &quot;isForDark&quot;: false,</span><br><span class="line">    &quot;altitude&quot;: 27.95,</span><br><span class="line">    &quot;azimuth&quot;: 279.66</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;2.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: false,</span><br><span class="line">    &quot;isForLight&quot;: false,</span><br><span class="line">    &quot;isForDark&quot;: false,</span><br><span class="line">    &quot;altitude&quot;: -31.05,</span><br><span class="line">    &quot;azimuth&quot;: 4.16</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;16.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: false,</span><br><span class="line">    &quot;isForLight&quot;: false,</span><br><span class="line">    &quot;isForDark&quot;: true,</span><br><span class="line">    &quot;altitude&quot;: -28.63,</span><br><span class="line">    &quot;azimuth&quot;: 340.41</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><h5 id="属性解释"><a href="#属性解释" class="headerlink" title="属性解释"></a>属性解释</h5><ul><li>fileName - 文件名，对应的图片名字</li><li>isPrimary - 是否是主图，heic的预览图就是他了，只能有一个</li><li>isForLight - 如果设置为trure，将显示在该壁纸的静态模式（白天）中</li><li>isForDark - 同上，不过是黑暗模式</li><li>altitude - 太阳和时间相关</li><li>azimuth - 太阳和时间相关<br>altitude和azimuth可以在<a href="https://keisan.casio.com/exec/system/1224682277" target="_blank" rel="noopener">https://keisan.casio.com/exec/system/1224682277</a>之中获取，填入对应时间对应的值即可</li></ul><h4 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h4><p><code>wallpapper -i &lt;your_json_name&gt;.json</code> 之后你就能获得一个output.heic啦，将背景壁纸设置成他就行～</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Mojave动态壁纸&quot;&gt;&lt;a href=&quot;#Mojave动态壁纸&quot; class=&quot;headerlink&quot; title=&quot;Mojave动态壁纸&quot;&gt;&lt;/a&gt;Mojave动态壁纸&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;OSX Mojave发布带来了黑暗模式，众多改进，
+      
+    
+    </summary>
+    
+      <category term="可以公开的情报" scheme="https://www.mizuka.top/categories/%E5%8F%AF%E4%BB%A5%E5%85%AC%E5%BC%80%E7%9A%84%E6%83%85%E6%8A%A5/"/>
+    
+    
+      <category term="OSX" scheme="https://www.mizuka.top/tags/OSX/"/>
+    
+      <category term="mojave" scheme="https://www.mizuka.top/tags/mojave/"/>
+    
+      <category term="动态壁纸" scheme="https://www.mizuka.top/tags/%E5%8A%A8%E6%80%81%E5%A3%81%E7%BA%B8/"/>
+    
+      <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>镜音len-朋克</title>
@@ -70,32 +102,11 @@
       <category term="可以公开的情报" scheme="https://www.mizuka.top/categories/%E5%8F%AF%E4%BB%A5%E5%85%AC%E5%BC%80%E7%9A%84%E6%83%85%E6%8A%A5/"/>
     
     
-      <category term="MAC" scheme="https://www.mizuka.top/tags/MAC/"/>
-    
       <category term="OSX" scheme="https://www.mizuka.top/tags/OSX/"/>
     
+      <category term="MAC" scheme="https://www.mizuka.top/tags/MAC/"/>
+    
       <category term="软件推荐" scheme="https://www.mizuka.top/tags/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://www.mizuka.top/2018/10/15/hello-world/"/>
-    <id>https://www.mizuka.top/2018/10/15/hello-world/</id>
-    <published>2018-10-15T03:22:59.325Z</published>
-    <updated>2018-10-15T03:22:59.325Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
     
   </entry>
   

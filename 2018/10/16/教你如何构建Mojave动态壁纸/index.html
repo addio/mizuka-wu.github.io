@@ -15,7 +15,7 @@
     <meta name="description" content="水华的博客，coser和前端记录">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>水华的博客</title>
+    <title>教你如何构建Mojave动态壁纸 · 水华的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180709 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -220,12 +222,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >水华的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">教你如何构建Mojave动态壁纸</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>水华的博客</a>
 </header>
@@ -239,24 +252,75 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://www.apple.com/macos/mojave/overview/hero/image_medium_2x.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            教你如何构建Mojave动态壁纸
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "OSX">OSX</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "mojave">mojave</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "动态壁纸">动态壁纸</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">677</span> / Reading time: <span class="post-count">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/10/16</span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -357,88 +421,84 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/16/教你如何构建Mojave动态壁纸/" >
-            
-                <span>教你如何构建Mojave动态壁纸</span>
-        </a>
-        <div class="abstract-content">
-            Mojave动态壁纸
-OSX Mojave发布带来了黑暗模式，众多改进，其中一个功能就在能够根据你当地所处的时间，动态切换系统背景
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Mojave动态壁纸"><a href="#Mojave动态壁纸" class="headerlink" title="Mojave动态壁纸"></a>Mojave动态壁纸</h1><blockquote>
+<p>OSX Mojave发布带来了黑暗模式，众多改进，其中一个功能就在能够根据你当地所处的时间，动态切换系统背景</p>
+</blockquote>
+<h2 id="动态壁纸"><a href="#动态壁纸" class="headerlink" title="动态壁纸"></a>动态壁纸</h2><p>大家都知道，apple得益于自身的封闭特性，拥有众多自身所特有的特殊格式，这次的动态背景其实就是依托于背后的<strong>Heic</strong>格式</p>
+<h3 id="Heic格式"><a href="#Heic格式" class="headerlink" title="Heic格式"></a>Heic格式</h3><p>如果你使用过apple的live photo 就会发现其导出的格式就是heic, 这其实就是一个类似一个短视频的格式，利用它， 我们将多张照片以及他们的时区等信息直接整合，输出成一张heic图片，就能提供给Mojave使用了</p>
+<h2 id="开始构建吧"><a href="#开始构建吧" class="headerlink" title="开始构建吧"></a>开始构建吧</h2><h3 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h3><p>关于工具，已经有人在github上开源了相关的构建脚本，不过请注意，只有Mac可以使用哦   <a href="https://github.com/mczachurski/wallpapper" target="_blank" rel="noopener">工具地址</a><br><img src="https://github.com/mczachurski/wallpapper/raw/master/Images/wallpaper.png" alt=""></p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><h4 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h4><p>工具有两种安装模式 <strong>Homebrew</strong> 以及 github安装，当然 如果你新装了系统，有些Xcode功能需要重新安装, 请先安装xcode-select并且输入<figure class="highlight plain"><figcaption><span>xcode-select -s</span><a href="/Applications/Xcode.app/Contents/Developer">```</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##### Homebrew</span><br><span class="line">打开你的命令行输入</span><br><span class="line">```bash</span><br><span class="line">brew tap mczachurski/wallpapper</span><br><span class="line">brew install wallpapper</span><br></pre></td></tr></table></figure></p>
+<h5 id="github安装"><a href="#github安装" class="headerlink" title="github安装"></a>github安装</h5><p>打开你的命令行，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mczachurski/wallpapper.git</span><br><span class="line"><span class="built_in">cd</span> wallpapper</span><br><span class="line">swift build --configuration release</span><br><span class="line">sudo cp .build/x86_64-apple-macosx10.10/release/wallpapper /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure></p>
+<p>注意 如果你用的swift4.1请编辑Package.swift</p>
+<h4 id="测试工具是否可用"><a href="#测试工具是否可用" class="headerlink" title="测试工具是否可用"></a>测试工具是否可用</h4><p>和大多数软件一样<figure class="highlight plain"><figcaption><span>-h```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后你会看到</span><br></pre></td></tr></table></figure></p>
+<p>wallpapper: [command_option] -i inputFile<br>Command options are:<br> -h            show this message and exit<br> -o            output file name (default is ‘output.heic’)<br> -i            input file name, json file with wallpaper description<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 构建</span><br><span class="line">前面所题，我们需要配置一些照片，并且配置每张照片的信息，所以新建一个json文件，内容类似</span><br><span class="line">```json</span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;1.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: true,</span><br><span class="line">    &quot;isForLight&quot;: true,</span><br><span class="line">    &quot;isForDark&quot;: false,</span><br><span class="line">    &quot;altitude&quot;: 27.95,</span><br><span class="line">    &quot;azimuth&quot;: 279.66</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;2.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: false,</span><br><span class="line">    &quot;isForLight&quot;: false,</span><br><span class="line">    &quot;isForDark&quot;: false,</span><br><span class="line">    &quot;altitude&quot;: -31.05,</span><br><span class="line">    &quot;azimuth&quot;: 4.16</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;fileName&quot;: &quot;16.png&quot;,</span><br><span class="line">    &quot;isPrimary&quot;: false,</span><br><span class="line">    &quot;isForLight&quot;: false,</span><br><span class="line">    &quot;isForDark&quot;: true,</span><br><span class="line">    &quot;altitude&quot;: -28.63,</span><br><span class="line">    &quot;azimuth&quot;: 340.41</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h5 id="属性解释"><a href="#属性解释" class="headerlink" title="属性解释"></a>属性解释</h5><ul>
+<li>fileName - 文件名，对应的图片名字</li>
+<li>isPrimary - 是否是主图，heic的预览图就是他了，只能有一个</li>
+<li>isForLight - 如果设置为trure，将显示在该壁纸的静态模式（白天）中</li>
+<li>isForDark - 同上，不过是黑暗模式</li>
+<li>altitude - 太阳和时间相关</li>
+<li>azimuth - 太阳和时间相关<br>altitude和azimuth可以在<a href="https://keisan.casio.com/exec/system/1224682277" target="_blank" rel="noopener">https://keisan.casio.com/exec/system/1224682277</a>之中获取，填入对应时间对应的值即可</li>
+</ul>
+<h4 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h4><p><code>wallpapper -i &lt;your_json_name&gt;.json</code> 之后你就能获得一个output.heic啦，将背景壁纸设置成他就行～</p>
 
-动态壁纸大家都知道，apple得益于自身的封闭特性，拥有众多自身所特有的特殊格式，这次的动态背景其实就是依托于背后的Heic格式
-Heic格式如果你使用过apple的live photo 就会发现其导出的格式就是heic, 这其实就是一个类似一个短视频的格式，利用它， 我们将多张照片以及他们的时区等信息直接整合，输出成一张heic图片，就能提供给Mojave使用了
-开始构建吧工具篇关于工具，已经有人在github上开源了相关的构建脚本，不过请注意，只有Ma...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "OSX">OSX</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "mojave">mojave</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "动态壁纸">动态壁纸</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/15/记不住快捷键怎么办/" >
-            
-                <span>记不住快捷键怎么办</span>
-        </a>
-        <div class="abstract-content">
-            记不住快捷键怎么办
-身为一个程序员怎么可以使用鼠标这么low的操作呢，但是快捷键就是记不住啊
-
-Chectsheet按住command键两秒钟，CheatSheet就会自动弹出来，告诉你当前程序的快捷键都有哪些。简直是神器啊
-下载地址点我下载
-
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2018/10/16/教你如何构建Mojave动态壁纸/">https://www.mizuka.top/2018/10/16/教你如何构建Mojave动态壁纸/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2018/10/16/教你如何构建Mojave动态壁纸/">October 16th 2018, 1:46:10 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "OSX">OSX</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "MAC">MAC</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件推荐">软件推荐</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/10/16/镜音len-朋克/" title= 镜音len-朋克 >
+                    <div class="prevTitle">镜音len-朋克</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "0eAmMMUxqe9alLwt4KzftCnv-gzGzoHsz",
+        appKey: "PfYhgvohzSQStMaJHaneYXq9",
+        placeholder: "给我个留言吧！",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -500,6 +560,24 @@ Chectsheet按住command键两秒钟，CheatSheet就会自动弹出来，告诉�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mojave动态壁纸"><span class="toc-number">1.</span> <span class="toc-text">Mojave动态壁纸</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态壁纸"><span class="toc-number">1.1.</span> <span class="toc-text">动态壁纸</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Heic格式"><span class="toc-number">1.1.1.</span> <span class="toc-text">Heic格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始构建吧"><span class="toc-number">1.2.</span> <span class="toc-text">开始构建吧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工具篇"><span class="toc-number">1.2.1.</span> <span class="toc-text">工具篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始"><span class="toc-number">1.2.2.</span> <span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装工具"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">安装工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#github安装"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">github安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试工具是否可用"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">测试工具是否可用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#属性解释"><span class="toc-number">1.2.2.2.1.</span> <span class="toc-text">属性解释</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">生成</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -698,6 +776,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
