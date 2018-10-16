@@ -8,14 +8,19 @@ tags:
 categories: Cos
 ---
 # 镜音朋克系列
-> 2017年拍摄的啦 棚子没定好太可惜了
+> QWQ面瘫如我，头一次自己后期 买的最小号的结果还是有点大？？？
+镜音连 cn: 水华
+摄影：W | 化妆：宛童 | 后期：水华 | 协力：水华
 
-![1](http://y.photo.qq.com/img?s=hESGGexZH&l=y.jpg)
-![2](http://y.photo.qq.com/img?s=fsnjD3GOC&l=y.jpg)
-![3](http://y.photo.qq.com/img?s=1EmTXZcE9&l=y.jpg)
-![4](http://y.photo.qq.com/img?s=T8KQQTgit&l=y.jpg)
-![5](http://y.photo.qq.com/img?s=W6PwzREqy&l=y.jpg)
-![6](http://y.photo.qq.com/img?s=hESGGexZH&l=y.jpg)
-![7](http://y.photo.qq.com/img?s=zs7R23nRh&l=y.jpg)
-![8](http://y.photo.qq.com/img?s=opzUS817v&l=y.jpg)
+[BCY](https://bcy.net/item/detail/6479650501859237646)
+
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/f56846b0b6bf11e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/ee3774b0b6bf11e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/096bb840b6c011e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/096bb840b6c011e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/0328c8b0b6c011e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/f9620990b6bf11e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/fc4ddee0b6bf11e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/ff78e010b6bf11e78be2bdad5bd1d03e.jpg/w650)
+![](https://img-bcy-qn.pstatp.com/coser/75358/post/c0c26/0651a700b6c011e78be2bdad5bd1d03e.jpg/w650)
 
