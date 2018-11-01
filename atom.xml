@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mizuka.top/"/>
-  <updated>2018-10-23T01:44:39.992Z</updated>
+  <updated>2018-11-01T09:26:03.196Z</updated>
   <id>https://www.mizuka.top/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学js很简单，就是有点头冷</title>
+    <link href="https://www.mizuka.top/2018/11/01/%E5%AD%A6js%E5%BE%88%E7%AE%80%E5%8D%95%EF%BC%8C%E5%B0%B1%E6%98%AF%E6%9C%89%E7%82%B9%E5%A4%B4%E5%86%B7/"/>
+    <id>https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/</id>
+    <published>2018-11-01T09:25:25.000Z</published>
+    <updated>2018-11-01T09:26:03.196Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="学js很简单，就是有点头冷"><a href="#学js很简单，就是有点头冷" class="headerlink" title="学js很简单，就是有点头冷"></a>学js很简单，就是有点头冷</h1><blockquote><p>对老angularjs项目进行改造以及迁移到vue，其中遇到了很多困难点以及很多js原理性的东西，在这里进行收集以及汇总</p></blockquote><h2 id="一些工具网站的推荐"><a href="#一些工具网站的推荐" class="headerlink" title="一些工具网站的推荐"></a>一些工具网站的推荐</h2><blockquote><p>在我刚入行的2016年，前端js的工程化也才刚刚兴起，虽然还是有很多网站还在完全使用jquery，css和js的引入方法仍然靠手工往html文件里插，现在完全都不一样了，node.js的出现，催生了express,gulp，webpack等等，整个前端开始完全工程化，源代码，生成，开发测试服务器，代码格式化，自动生成注释，甚至连编辑器都，当然啦，这样也催生了很多问题，比如webpack的另一面也是以配置繁琐而出名，以下顺便介绍几个小网站，可以自动生成新建一个项目的常用配置</p></blockquote><ul><li><strong>gitignore</strong> 告知git系统中哪些文件不需要进入git，推荐<a href="https://www.gitignore.io/" target="_blank" rel="noopener">gitignore.io</a>,只要输入目标语言以及编辑器即可 <a href="https://www.gitignore.io/api/node,vuejs,webstorm,visualstudiocode" target="_blank" rel="noopener">一个vue的例子</a></li><li><strong>license</strong> 授权文件，有时候这个是维权的好东西<a href="https://choosealicense.com/" target="_blank" rel="noopener">https://choosealicense.com/</a></li><li><strong>兼容性检查</strong> 查看你要用的特性是否支持，万恶的ie基本都是红的<a href="https://caniuse.com/#search=fetch" target="_blank" rel="noopener">caniuse</a>,虽然很多可以通过各种polyfill进行解决，不过总是有几个漏网之鱼不是么</li><li><strong>polyfill</strong> babel的转码只会转语法，一些基于浏览器的特性是不会进行转码的，比如Promise需要引入专用的promise-polyfill，推荐一个能够自动注入的网站<a href="https://polyfill.io/v2/docs/" target="_blank" rel="noopener">polyfill.io</a></li><li><strong>渐变生成</strong> 生成css渐变色很麻烦？ <a href="http://www.colorzilla.com/gradient-editor/" target="_blank" rel="noopener">试试这个</a></li><li><strong>其他辅助</strong> 从正则到css到box-shadow，这个网站应有尽有<a href="http://tools.jb51.net/aideddesign/css3_boxshadow" target="_blank" rel="noopener">http://tools.jb51.net/aideddesign/css3_boxshadow</a></li></ul><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="js版本"><a href="#js版本" class="headerlink" title="js版本"></a>js版本</h3><p>js有几个主要阶段，ES3，ES5，ES6，ES7，ES8，其中最为重要的大概就是es5，es6了，es5是目前浏览器支持最为广泛的一个版本（因为IE），es6相当于现代浏览器的一个标志，ES6中大量新特性的加入，使得本身很多困恼前端的问题，比如作用域提升啊，回调地狱啊等，都有了很大程度的提升以及弥补，当然因为不是所有浏览器都实现了这些es6的规范，为了兼容考虑，我们都会使用babel将其转回ES5，记住，因为babel只会转译语法糖和一部分实现，像新的类（Promise）还是需要使用polyfill来进行实现的。</p><h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>跨域的详细介绍可以参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">ruanyifeng的博客</a><br>简单来说，端口，域名，子域名，只要有一点不一样，浏览器就会自动帮我们把请求返回的数据给拦截，所以开发过程中收不到后端小伙伴给的数据也请不要着急，开发中我们可以使用webpack的dev-server的<a href="https://blog.csdn.net/imkxrc/article/details/80648371" target="_blank" rel="noopener">proxy功能</a>，正式版用nginx代理api和前端到同一个域名，当然直接上<a href="https://www.jianshu.com/p/f9c21da2c661" target="_blank" rel="noopener">cors</a>进行跨域也是可以的，不过这个主要还是后端的工作啦，而且记住，options请求也让后端处理一下</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;学js很简单，就是有点头冷&quot;&gt;&lt;a href=&quot;#学js很简单，就是有点头冷&quot; class=&quot;headerlink&quot; title=&quot;学js很简单，就是有点头冷&quot;&gt;&lt;/a&gt;学js很简单，就是有点头冷&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;对老angularjs项目
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="https://www.mizuka.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="前端" scheme="https://www.mizuka.top/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
+      <category term="javascript" scheme="https://www.mizuka.top/tags/javascript/"/>
+    
+      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>情侣日常1</title>
@@ -97,13 +129,13 @@
       <category term="可以公开的情报" scheme="https://www.mizuka.top/categories/%E5%8F%AF%E4%BB%A5%E5%85%AC%E5%BC%80%E7%9A%84%E6%83%85%E6%8A%A5/"/>
     
     
+      <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
       <category term="OSX" scheme="https://www.mizuka.top/tags/OSX/"/>
     
       <category term="mojave" scheme="https://www.mizuka.top/tags/mojave/"/>
     
       <category term="动态壁纸" scheme="https://www.mizuka.top/tags/%E5%8A%A8%E6%80%81%E5%A3%81%E7%BA%B8/"/>
-    
-      <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   

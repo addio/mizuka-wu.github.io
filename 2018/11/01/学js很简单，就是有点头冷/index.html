@@ -15,7 +15,7 @@
     <meta name="description" content="水华的博客，coser和前端记录">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>从js数组重查找出重复元素的方法 · 水华的博客</title>
+    <title>学js很简单，就是有点头冷 · 水华的博客</title>
     <link rel="manifest" href="/manifest.json">
     <style type="text/css">
     @font-face {
@@ -237,7 +237,7 @@
                 <a href="/" >水华的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">从js数组重查找出重复元素的方法</a>
+                <a href="#" class="post-name">学js很简单，就是有点头冷</a>
             </div>
     </div>
     
@@ -269,7 +269,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            从js数组重查找出重复元素的方法
+            学js很简单，就是有点头冷
             <!-- 404 -->
             
         </h1>
@@ -288,24 +288,24 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "js">js</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "ecmascript">ecmascript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数组">数组</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "技巧">技巧</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">46</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">804</span> / Reading time: <span class="post-count">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/10/18</span>
+                    <span class="post-intro-time">2018/11/01</span>
                     
                     <span class="shareWrapper">
                         <span class="iconfont-archer shareIcon">&#xe71d;</span>
@@ -424,15 +424,30 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="一段从数组中获取重复数据的代码"><a href="#一段从数组中获取重复数据的代码" class="headerlink" title="一段从数组中获取重复数据的代码"></a>一段从数组中获取重复数据的代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.duplicate=function() &#123;</span><br><span class="line">  let tmp = [];</span><br><span class="line">  this.concat().sort().sort(function(a,b)&#123;</span><br><span class="line">    if(a==b &amp;&amp; tmp.indexOf(a) === -1) tmp.push(a);</span><br><span class="line">  &#125;);</span><br><span class="line">  return tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="学js很简单，就是有点头冷"><a href="#学js很简单，就是有点头冷" class="headerlink" title="学js很简单，就是有点头冷"></a>学js很简单，就是有点头冷</h1><blockquote>
+<p>对老angularjs项目进行改造以及迁移到vue，其中遇到了很多困难点以及很多js原理性的东西，在这里进行收集以及汇总</p>
+</blockquote>
+<h2 id="一些工具网站的推荐"><a href="#一些工具网站的推荐" class="headerlink" title="一些工具网站的推荐"></a>一些工具网站的推荐</h2><blockquote>
+<p>在我刚入行的2016年，前端js的工程化也才刚刚兴起，虽然还是有很多网站还在完全使用jquery，css和js的引入方法仍然靠手工往html文件里插，现在完全都不一样了，node.js的出现，催生了express,gulp，webpack等等，整个前端开始完全工程化，源代码，生成，开发测试服务器，代码格式化，自动生成注释，甚至连编辑器都，当然啦，这样也催生了很多问题，比如webpack的另一面也是以配置繁琐而出名，以下顺便介绍几个小网站，可以自动生成新建一个项目的常用配置</p>
+</blockquote>
+<ul>
+<li><strong>gitignore</strong> 告知git系统中哪些文件不需要进入git，推荐<a href="https://www.gitignore.io/" target="_blank" rel="noopener">gitignore.io</a>,只要输入目标语言以及编辑器即可 <a href="https://www.gitignore.io/api/node,vuejs,webstorm,visualstudiocode" target="_blank" rel="noopener">一个vue的例子</a></li>
+<li><strong>license</strong> 授权文件，有时候这个是维权的好东西<a href="https://choosealicense.com/" target="_blank" rel="noopener">https://choosealicense.com/</a></li>
+<li><strong>兼容性检查</strong> 查看你要用的特性是否支持，万恶的ie基本都是红的<a href="https://caniuse.com/#search=fetch" target="_blank" rel="noopener">caniuse</a>,虽然很多可以通过各种polyfill进行解决，不过总是有几个漏网之鱼不是么</li>
+<li><strong>polyfill</strong> babel的转码只会转语法，一些基于浏览器的特性是不会进行转码的，比如Promise需要引入专用的promise-polyfill，推荐一个能够自动注入的网站<a href="https://polyfill.io/v2/docs/" target="_blank" rel="noopener">polyfill.io</a></li>
+<li><strong>渐变生成</strong> 生成css渐变色很麻烦？ <a href="http://www.colorzilla.com/gradient-editor/" target="_blank" rel="noopener">试试这个</a></li>
+<li><strong>其他辅助</strong> 从正则到css到box-shadow，这个网站应有尽有<a href="http://tools.jb51.net/aideddesign/css3_boxshadow" target="_blank" rel="noopener">http://tools.jb51.net/aideddesign/css3_boxshadow</a></li>
+</ul>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="js版本"><a href="#js版本" class="headerlink" title="js版本"></a>js版本</h3><p>js有几个主要阶段，ES3，ES5，ES6，ES7，ES8，其中最为重要的大概就是es5，es6了，es5是目前浏览器支持最为广泛的一个版本（因为IE），es6相当于现代浏览器的一个标志，ES6中大量新特性的加入，使得本身很多困恼前端的问题，比如作用域提升啊，回调地狱啊等，都有了很大程度的提升以及弥补，当然因为不是所有浏览器都实现了这些es6的规范，为了兼容考虑，我们都会使用babel将其转回ES5，记住，因为babel只会转译语法糖和一部分实现，像新的类（Promise）还是需要使用polyfill来进行实现的。</p>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>跨域的详细介绍可以参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">ruanyifeng的博客</a><br>简单来说，端口，域名，子域名，只要有一点不一样，浏览器就会自动帮我们把请求返回的数据给拦截，所以开发过程中收不到后端小伙伴给的数据也请不要着急，开发中我们可以使用webpack的dev-server的<a href="https://blog.csdn.net/imkxrc/article/details/80648371" target="_blank" rel="noopener">proxy功能</a>，正式版用nginx代理api和前端到同一个域名，当然直接上<a href="https://www.jianshu.com/p/f9c21da2c661" target="_blank" rel="noopener">cors</a>进行跨域也是可以的，不过这个主要还是后端的工作啦，而且记住，options请求也让后端处理一下</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
-            <p>原文链接: <a href="https://www.mizuka.top/2018/10/18/从js数组重查找出重复元素的方法/">https://www.mizuka.top/2018/10/18/从js数组重查找出重复元素的方法/</a>
-            <p>发表日期: <a href="https://www.mizuka.top/2018/10/18/从js数组重查找出重复元素的方法/">October 18th 2018, 11:12:53 am</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/">https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/">November 1st 2018, 5:25:25 pm</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -440,17 +455,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/10/23/情侣日常1/" title= 情侣日常1 >
-                    <div class="nextTitle">情侣日常1</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/10/16/教你如何构建Mojave动态壁纸/" title= 教你如何构建Mojave动态壁纸 >
-                    <div class="prevTitle">教你如何构建Mojave动态壁纸</div>
+                <a href= "/2018/10/23/情侣日常1/" title= 情侣日常1 >
+                    <div class="prevTitle">情侣日常1</div>
                 </a>
             
         </li>
@@ -563,7 +573,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一段从数组中获取重复数据的代码"><span class="toc-number">1.</span> <span class="toc-text">一段从数组中获取重复数据的代码</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#学js很简单，就是有点头冷"><span class="toc-number">1.</span> <span class="toc-text">学js很简单，就是有点头冷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些工具网站的推荐"><span class="toc-number">1.1.</span> <span class="toc-text">一些工具网站的推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-number">1.2.</span> <span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#js版本"><span class="toc-number">1.2.1.</span> <span class="toc-text">js版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域"><span class="toc-number">1.2.2.</span> <span class="toc-text">跨域</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
