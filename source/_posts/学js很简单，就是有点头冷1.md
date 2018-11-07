@@ -23,3 +23,9 @@ categories: 学习笔记
 
 ## 知道为什么js如此重要么？
 HTML是骨架，css像是化妆品，js。。。能生成和修改html和css
+
+# 开始吧
+## 版本管理工具
+![gitlogo](https://www.linuxjournal.com/sites/default/files/styles/360_250/public/nodeimage/story/git-icon.png)
+
+我们版本管理工具选择git，主要是为了托管在github上，git的一个好处就是分支开发，这样多个人在同一个可以进行同步开发，以及，**查找哪些有问题的代码是谁写的**
