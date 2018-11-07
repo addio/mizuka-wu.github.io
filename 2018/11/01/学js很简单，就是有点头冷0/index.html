@@ -15,7 +15,7 @@
     <meta name="description" content="水华的博客，coser和前端记录">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>学js很简单，就是有点头冷 · 水华的博客</title>
+    <title>学js很简单，就是有点头冷（0，大概是绪论） · 水华的博客</title>
     <link rel="manifest" href="/manifest.json">
     <style type="text/css">
     @font-face {
@@ -237,7 +237,7 @@
                 <a href="/" >水华的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">学js很简单，就是有点头冷</a>
+                <a href="#" class="post-name">学js很简单，就是有点头冷（0，大概是绪论）</a>
             </div>
     </div>
     
@@ -269,7 +269,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            学js很简单，就是有点头冷
+            学js很简单，就是有点头冷（0，大概是绪论）
             <!-- 404 -->
             
         </h1>
@@ -300,7 +300,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">804</span> / Reading time: <span class="post-count">2 min</span></span>
+                        <span>Word count: <span class="post-count">1.2k</span> / Reading time: <span class="post-count">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -440,20 +440,33 @@ height:50vh;
 </ul>
 <h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="js版本"><a href="#js版本" class="headerlink" title="js版本"></a>js版本</h3><p>js有几个主要阶段，ES3，ES5，ES6，ES7，ES8，其中最为重要的大概就是es5，es6了，es5是目前浏览器支持最为广泛的一个版本（因为IE），es6相当于现代浏览器的一个标志，ES6中大量新特性的加入，使得本身很多困恼前端的问题，比如作用域提升啊，回调地狱啊等，都有了很大程度的提升以及弥补，当然因为不是所有浏览器都实现了这些es6的规范，为了兼容考虑，我们都会使用babel将其转回ES5，记住，因为babel只会转译语法糖和一部分实现，像新的类（Promise）还是需要使用polyfill来进行实现的。</p>
 <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>跨域的详细介绍可以参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">ruanyifeng的博客</a><br>简单来说，端口，域名，子域名，只要有一点不一样，浏览器就会自动帮我们把请求返回的数据给拦截，所以开发过程中收不到后端小伙伴给的数据也请不要着急，开发中我们可以使用webpack的dev-server的<a href="https://blog.csdn.net/imkxrc/article/details/80648371" target="_blank" rel="noopener">proxy功能</a>，正式版用nginx代理api和前端到同一个域名，当然直接上<a href="https://www.jianshu.com/p/f9c21da2c661" target="_blank" rel="noopener">cors</a>进行跨域也是可以的，不过这个主要还是后端的工作啦，而且记住，options请求也让后端处理一下</p>
-
+<h3 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h3><p>最早的时候，整个前端项目的开发是非常无序的，新建一个html，然后通过链接往里面不停的塞js，塞css，那个时候整个项目基本都是静态网页，而动态的部分一般交由php或者java的jsp进行动态生成html代码，然后通过服务器生成后扔回给用户的浏览器，但是随着nodejs的出现以及html5的出现，前端开始逐渐承担起和用户交互的工作，而不是原先仅仅制作出一些简单的动效以及布局，前端也由一个人进行开发而变成了多人协作，甚至在今天，前端不仅仅可以运行在浏览器上，作为服务器以及app也不再是什么难事</p>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>简单来说，js为了防止多个线程修改同一个dom这一类的操作，是只有一个线程的（webworker，serviceworker是后来出的，而且不能和dom通信），js就设计了一个回调机制，事件循环，最简单来说，有两个循环，main循环，micro循环，当js有空闲的时候，优先从micro循环中取下一个要调用的函数，然后才是main循环中，而main循环只有三种方式插入</p>
+<ol>
+<li>新的js文件引入</li>
+<li>setTimeout</li>
+<li>setInterval</li>
+</ol>
+<p>记住，有时候js一些奇怪的行为就是因为时间循环，以及。。。这是面试考点，问你数据输出顺序的</p>
+<h3 id="等待更新区域"><a href="#等待更新区域" class="headerlink" title="等待更新区域"></a>等待更新区域</h3>
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
-            <p>原文链接: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/">https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/</a>
-            <p>发表日期: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷/">November 1st 2018, 5:25:25 pm</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷0/">https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷0/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2018/11/01/学js很简单，就是有点头冷0/">November 1st 2018, 5:25:25 pm</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/11/07/学js很简单，就是有点头冷1/" title= 学js很简单，就是有点头冷（1从工程化开始） >
+                    <div class="nextTitle">学js很简单，就是有点头冷（1从工程化开始）</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -573,7 +586,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#学js很简单，就是有点头冷"><span class="toc-number">1.</span> <span class="toc-text">学js很简单，就是有点头冷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些工具网站的推荐"><span class="toc-number">1.1.</span> <span class="toc-text">一些工具网站的推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-number">1.2.</span> <span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#js版本"><span class="toc-number">1.2.1.</span> <span class="toc-text">js版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域"><span class="toc-number">1.2.2.</span> <span class="toc-text">跨域</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#学js很简单，就是有点头冷"><span class="toc-number">1.</span> <span class="toc-text">学js很简单，就是有点头冷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些工具网站的推荐"><span class="toc-number">1.1.</span> <span class="toc-text">一些工具网站的推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-number">1.2.</span> <span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#js版本"><span class="toc-number">1.2.1.</span> <span class="toc-text">js版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域"><span class="toc-number">1.2.2.</span> <span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工程化"><span class="toc-number">1.2.3.</span> <span class="toc-text">工程化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件循环"><span class="toc-number">1.2.4.</span> <span class="toc-text">事件循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等待更新区域"><span class="toc-number">1.2.5.</span> <span class="toc-text">等待更新区域</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -647,9 +660,18 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 8
         </div>
         <!-- search  -->
         
@@ -669,7 +691,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷/" >学js很简单，就是有点头冷</a>
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/学js很简单，就是有点头冷1/" >学js很简单，就是有点头冷（1从工程化开始）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷0/" >学js很简单，就是有点头冷（0，大概是绪论）</a>
         </li>
     
     
