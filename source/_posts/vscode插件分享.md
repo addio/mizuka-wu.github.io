@@ -11,6 +11,8 @@ categories: 开发的捷径
 # VSCODE的插件系列
 > 使用vscode进行开发怎么能少的了插件呢  
 
+[![](https://badge.juejin.im/entry/5be530546fb9a049f153b37f/likes.svg?style=flat-square)](https://juejin.im/post/5be53004f265da615b70f7a0)
+
 丰富的插件让vscode更加好用 顺便推荐图床[（图床地址）](https://sm.ms/)
 
 # 美化插件
