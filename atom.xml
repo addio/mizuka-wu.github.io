@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mizuka.top/"/>
-  <updated>2018-11-07T06:18:40.635Z</updated>
+  <updated>2018-11-09T06:55:47.230Z</updated>
   <id>https://www.mizuka.top/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vscode插件分享</title>
+    <link href="https://www.mizuka.top/2018/11/09/vscode%E6%8F%92%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    <id>https://www.mizuka.top/2018/11/09/vscode插件分享/</id>
+    <published>2018-11-09T02:26:22.000Z</published>
+    <updated>2018-11-09T06:55:47.230Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="VSCODE的插件系列"><a href="#VSCODE的插件系列" class="headerlink" title="VSCODE的插件系列"></a>VSCODE的插件系列</h1><blockquote><p>使用vscode进行开发怎么能少的了插件呢  </p></blockquote><p>丰富的插件让vscode更加好用 顺便推荐图床<a href="https://sm.ms/" target="_blank" rel="noopener">（图床地址）</a></p><h1 id="美化插件"><a href="#美化插件" class="headerlink" title="美化插件"></a>美化插件</h1><ul><li><p>background 给编辑器窗口加个背景！唯一的缺点是vscode会显示已损坏，当然啦，并不影响使用<br><img src="https://i.loli.net/2018/11/09/5be524d44f7b0.png" alt=""><br>可以参考以下配置</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"background.useDefault"</span>: <span class="literal">false</span>,</span><br><span class="line"><span class="string">"background.style"</span>: &#123;</span><br><span class="line">  <span class="string">"content"</span>: <span class="string">"''"</span>,</span><br><span class="line">  <span class="string">"pointer-events"</span>: <span class="string">"none"</span>,</span><br><span class="line">  <span class="string">"position"</span>: <span class="string">"absolute"</span>,</span><br><span class="line">  <span class="string">"z-index"</span>: <span class="string">"99999"</span>,</span><br><span class="line">  <span class="string">"width"</span>: <span class="string">"100%"</span>,</span><br><span class="line">  <span class="string">"height"</span>: <span class="string">"100%"</span>,</span><br><span class="line">  <span class="string">"background-position"</span>: <span class="string">"100% 90%"</span>,</span><br><span class="line">  <span class="string">"background-size"</span>: <span class="string">"auto 60%"</span>,</span><br><span class="line">  <span class="string">"background-repeat"</span>: <span class="string">"no-repeat"</span>,</span><br><span class="line">  <span class="string">"opacity"</span>: <span class="number">0.1</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"background.customImages"</span>: [</span><br><span class="line">  <span class="string">"背景图片地址1"</span>,</span><br><span class="line">  <span class="string">"背景图片地址2"</span>,</span><br><span class="line">  <span class="string">"背景图片地址3"</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure></li><li><p>carbon-now-sh 一个非常好看的代码截图工具 整合之后 选中然后快捷键就能截图啦 <img src="https://i.loli.net/2018/11/09/5be5271f9c4e3.png" alt=""></p></li></ul><h1 id="开发辅助"><a href="#开发辅助" class="headerlink" title="开发辅助"></a>开发辅助</h1><h2 id="Debugger"><a href="#Debugger" class="headerlink" title="Debugger"></a>Debugger</h2><ul><li>Debugger for Chrome 看名字就知道了</li><li>open in browser 懒得开浏览器用的</li><li>Quokka.js 实时计算，查看结果<br><img src="https://quokkajs.com/assets/img/vsc1.gif" alt=""></li></ul><h2 id="路径补全以及包大小"><a href="#路径补全以及包大小" class="headerlink" title="路径补全以及包大小"></a>路径补全以及包大小</h2><ul><li>File Peek</li><li>Import Cost 计算引入需要占用多大的地方</li><li>Path Intellisense</li></ul><h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><ul><li>npm</li><li>NPM-Scripts 方便运行脚本</li></ul><h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><ul><li>ESLint</li><li>Prettier 格式化</li><li>Vetur vue格式化以及相关配置</li><li>Vue 2 Snippets</li></ul><p>eslint 和 prettier配合使用，vue自动保存格式化的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&quot;vetur.format.defaultFormatter.html&quot;: &quot;none&quot;, // 默认html的方法</span><br><span class="line">&quot;eslint.autoFixOnSave&quot;: true, // 自动保存</span><br><span class="line">&quot;eslint.validate&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;language&quot;: &quot;vue&quot;,</span><br><span class="line">    &quot;autoFix&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;language&quot;: &quot;html&quot;,</span><br><span class="line">    &quot;autoFix&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;language&quot;: &quot;javascript&quot;,</span><br><span class="line">    &quot;autoFix&quot;: true</span><br><span class="line">  &#125;</span><br><span class="line">],</span><br><span class="line">&quot;prettier.singleQuote&quot;: true, // &apos; or &quot;&quot;</span><br><span class="line">&quot;prettier.semi&quot;: false, // 分号</span><br><span class="line">&quot;prettier.eslintIntegration&quot;: true, // 走eslint</span><br></pre></td></tr></table></figure></p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul><li>GitLens 比自带的git好用多了的git 还能显示xx行是谁什么时候提交的</li><li>Settings Sync 同步设置到git上<br><strong>强烈推荐</strong> 具体安装步骤可以参考<a href="https://blog.csdn.net/u012207345/article/details/78246623" target="_blank" rel="noopener">其他人的博客</a><br>这里就写一下mac下的快捷键  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">downloadSettings    ⇧⌥D</span><br><span class="line">extension.updateSettings    ⇧⌥U</span><br></pre></td></tr></table></figure></li></ul><p>最后送上我当前配置的gist，有需要的可以安装上setting sync后将创建的gist改成这个来自动获取插件哦<br><a href="https://gist.github.com/mizuka-wu/5c74462ce1620fd62af7beb88501d163" target="_blank" rel="noopener">gist 地址</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;VSCODE的插件系列&quot;&gt;&lt;a href=&quot;#VSCODE的插件系列&quot; class=&quot;headerlink&quot; title=&quot;VSCODE的插件系列&quot;&gt;&lt;/a&gt;VSCODE的插件系列&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;使用vscode进行开发怎么能少的了插件呢
+      
+    
+    </summary>
+    
+      <category term="开发的捷径" scheme="https://www.mizuka.top/categories/%E5%BC%80%E5%8F%91%E7%9A%84%E6%8D%B7%E5%BE%84/"/>
+    
+    
+      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="学习" scheme="https://www.mizuka.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="记录" scheme="https://www.mizuka.top/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+      <category term="vscode" scheme="https://www.mizuka.top/tags/vscode/"/>
+    
+  </entry>
   
   <entry>
     <title>学js很简单，就是有点头冷（1从工程化开始）</title>
@@ -39,13 +71,13 @@
       <category term="学习笔记" scheme="https://www.mizuka.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="前端" scheme="https://www.mizuka.top/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
     
       <category term="javascript" scheme="https://www.mizuka.top/tags/javascript/"/>
-    
-      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -71,13 +103,13 @@
       <category term="学习笔记" scheme="https://www.mizuka.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="前端" scheme="https://www.mizuka.top/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="教程" scheme="https://www.mizuka.top/tags/%E6%95%99%E7%A8%8B/"/>
     
       <category term="javascript" scheme="https://www.mizuka.top/tags/javascript/"/>
-    
-      <category term="笔记" scheme="https://www.mizuka.top/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
