@@ -18,8 +18,8 @@ social:
   rss: /atom.xml
 # friends
 friends:
-  我的项目: //www.baidu.com
-  friendB: //www.google.com
+  掘金主页: //juejin.im/user/5930b38a2f301e006bd366c0
+  简书: //www.jianshu.com/u/6e96ca25886f
   friendC: 
 about:
   enable: true
