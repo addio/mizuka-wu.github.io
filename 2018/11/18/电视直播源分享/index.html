@@ -15,7 +15,7 @@
     <meta name="description" content="水华的博客，coser和前端记录">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>小微企业验证码破解 · 水华的博客</title>
+    <title>电视直播源分享 · 水华的博客</title>
     <link rel="manifest" href="/manifest.json">
     <style type="text/css">
     @font-face {
@@ -237,7 +237,7 @@
                 <a href="/" >水华的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">小微企业验证码破解</a>
+                <a href="#" class="post-name">电视直播源分享</a>
             </div>
     </div>
     
@@ -269,7 +269,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            小微企业验证码破解
+            电视直播源分享
             <!-- 404 -->
             
         </h1>
@@ -288,12 +288,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">763</span> / Reading time: <span class="post-count">3 min</span></span>
+                        <span>Word count: <span class="post-count">611</span> / Reading time: <span class="post-count">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/13</span>
+                    <span class="post-intro-time">2018/11/18</span>
                     
                     <span class="shareWrapper">
                         <span class="iconfont-archer shareIcon">&#xe71d;</span>
@@ -412,47 +412,14 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="小微企业查询系统git地址"><a href="#小微企业查询系统git地址" class="headerlink" title="小微企业查询系统git地址"></a>小微企业查询系统<a href="https://github.com/trionfo1993/xwqy-geetest" target="_blank" rel="noopener">git地址</a></h1><blockquote>
-<p>破解geetest offline的尝试</p>
-</blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>最近因为有需要对爬取的非上市公司进行一个验证，而绝大多数的非上市公司又都是小微企业，比起爬企业征信系统来说，还是小微企业名录更方便一点</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>基于node.js axios全程破解 无需下载图片 无需模拟轨迹，offline模式就是任性</p>
-<h3 id="觉得不错帮忙Star一下啦～"><a href="#觉得不错帮忙Star一下啦～" class="headerlink" title="觉得不错帮忙Star一下啦～"></a>觉得不错帮忙Star一下啦～</h3><h4 id="破解流程"><a href="#破解流程" class="headerlink" title="破解流程"></a>破解流程</h4><p>首先我们跟着正常获取数据的流程走一遍</p>
-<ol>
-<li>打开<a href="http://xwqy.gsxt.gov.cn/" target="_blank" rel="noopener">小微企业名录</a>并且打开控制台</li>
-</ol>
-<p>可以看到大概有这几个请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xwqy.gsxt.gov.cn/security/verify_ip</span><br><span class="line">http://xwqy.gsxt.gov.cn/security/verify_keyword</span><br><span class="line">http://xwqy.gsxt.gov.cn/pc-geetest/register?t=1516872325770</span><br></pre></td></tr></table></figure></p>
-<p>查看一下response(当然你熟悉geetest也行)就会发现register就是geetest的初始化请求啦  </p>
-<p><strong>返回值如下</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">challenge:&quot;a1d0c6e83f027327d8461063f4ac58a61c&quot;</span><br><span class="line">gt:&quot;6146190e4171da316dbb5bcc076e2607&quot;</span><br><span class="line">success:0</span><br></pre></td></tr></table></figure></p>
-<p>其中你可以发现success基本都是0 也就是说离线模式</p>
-<h4 id="什么是离线模式？"><a href="#什么是离线模式？" class="headerlink" title="什么是离线模式？"></a>什么是离线模式？</h4><p>基本就是geetest不参与判断的一个状态，验证部分都在前台和中间服务器完成</p>
-<p>回去看之前系统下载的js 会发现两个geetest提供的js  </p>
-<ul>
-<li>geetest.0.0.0.js</li>
-<li>offline.6.0.0.js</li>
-</ul>
-<p>这几个源文件也提供在项目中了</p>
-<ol start="2">
-<li>滑块拼合</li>
-</ol>
-<p>发送了一个新的验证请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http://xwqy.gsxt.gov.cn/pc-geetest/validate</span><br><span class="line"></span><br><span class="line">request如下：  </span><br><span class="line"></span><br><span class="line">geetest_challenge:a1d0c6e83f027327d8461063f4ac58a61c</span><br><span class="line">geetest_validate:010886ec_0084e_10100077776e</span><br><span class="line">geetest_seccode:010886ec_0084e_10100077776e|jordan</span><br></pre></td></tr></table></figure></p>
-<h5 id="challenge在第一步我们已经获取了，问题是validate怎么获取-同时seccode就是validate加了一个-jordan而已"><a href="#challenge在第一步我们已经获取了，问题是validate怎么获取-同时seccode就是validate加了一个-jordan而已" class="headerlink" title="challenge在第一步我们已经获取了，问题是validate怎么获取? 同时seccode就是validate加了一个|jordan而已"></a>challenge在第一步我们已经获取了，问题是validate怎么获取? 同时seccode就是validate加了一个|jordan而已</h5><p>既然是offline 那就分析offline.js呗</p>
-<p>查看代码就能看到这句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">return c &gt;= f - 3 &amp;&amp; c &lt;= f + 3 ? &#123;</span><br><span class="line">            success: !0,</span><br><span class="line">            message: &quot;success&quot;,</span><br><span class="line">            validate: b.A(c, e.d.challenge) + &quot;_&quot; + b.A(a.b(&quot;rand0&quot;, e.c), e.d.challenge) + &quot;_&quot; + b.A(a.b(&quot;rand1&quot;, e.c), e.d.challenge),</span><br><span class="line">            score: Math.round(d / 200)</span><br><span class="line">        &#125; : &#123;success: 0, message: &quot;fail&quot;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这不就是我们要的么！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validate: b.A(c, e.d.challenge) + &quot;_&quot; + b.A(a.b(&quot;rand0&quot;, e.c), e.d.challenge) + &quot;_&quot; + b.A(a.b(&quot;rand1&quot;, e.c), e.d.challenge),</span><br></pre></td></tr></table></figure></p>
-<p>offline.6.0.0.js和offline.5.0.0.js可以看出一样是通过密钥 rand rand1进行加密获取一个值，一半来说这种方案就是得依靠收集案例倒推，但是我们是不会重复造轮子的</p>
-<p>github关键词一搜就能发现已经有人整理好了<a href="&#39;https://github.com/9468305/python-script/blob/master/geetest_offline/util.py&#39;">‘https://github.com/9468305/python-script/blob/master/geetest_offline/util.py’</a></p>
-<p>所以那就用呗</p>
-<p>后续就只是涉及到爬虫以及页面跳转的问题了，具体可以看util内的代码</p>
-<p>而且在micro_lib内也可以直接搜索 发送验证的地址改为<a href="http://xwqy.gsxt.gov.cn/mirco/micro_lib" target="_blank" rel="noopener">http://xwqy.gsxt.gov.cn/mirco/micro_lib</a></p>
-<p>并相应修改传入的值即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">organId:100000</span><br><span class="line">textfield:encode后的关键词</span><br><span class="line">fwId:1400</span><br><span class="line">searchOrganId:</span><br><span class="line">channelId:99</span><br><span class="line">captcha:</span><br><span class="line">geetest_challenge:3ef815416f775098fe977004015c619332</span><br><span class="line">geetest_validate:010886ec_0084e_10100077776e</span><br><span class="line">geetest_seccode:010886ec_0084e_10100077776e|jordan</span><br></pre></td></tr></table></figure></p>
-<h3 id="restful-api"><a href="#restful-api" class="headerlink" title="restful-api"></a>restful-api</h3><h4 id="已经做了一个api形式的-直接在url内打入关键词即可爬取"><a href="#已经做了一个api形式的-直接在url内打入关键词即可爬取" class="headerlink" title="已经做了一个api形式的 直接在url内打入关键词即可爬取"></a>已经做了一个api形式的 直接在url内打入关键词即可爬取</h4><h4 id="运行步骤"><a href="#运行步骤" class="headerlink" title="运行步骤"></a>运行步骤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run start</span><br><span class="line">curl http://127.0.0.1:4001/公司关键词</span><br></pre></td></tr></table></figure>
+        <h1 id="你懂的"><a href="#你懂的" class="headerlink" title="你懂的"></a>你懂的</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">凤凰中文,http://223.110.243.155:80/PLTV/3/224/3221226922/index.m3u8</span><br><span class="line">凤凰中文,http://223.110.245.139/PLTV/3/224/3221226922/index.m3u8</span><br><span class="line">凤凰中文,http://112.17.0.10:8085/ysten-business/live/fhchinese/yst.m3u8</span><br><span class="line">凤凰资讯,http://223.110.243.155:80/PLTV/3/224/3221226923/index.m3u8</span><br><span class="line">凤凰HD,http://223.82.250.72/live/fhchinese/1.m3u8</span><br><span class="line">凤凰香港,http://223.110.243.155:80/PLTV/3/224/3221226975/index.m3u8</span><br><span class="line">澳门赛马台,rtmp://mjcao-001.wecast.hk:1935/live/chinese</span><br><span class="line">澳丫卫视,http://stream.mastvnet.com/MASTV/sd/live.m3u8</span><br><span class="line">澳门卫视,http://stream.mastvnet.com/MSTV/SD/live.m3u8</span><br><span class="line">澳门澳视澳门,rtmp://live4.tdm.com.mo:80/ch1/_definst_/ch1.live</span><br><span class="line">澳门澳视葡文,rtmp://live4.tdm.com.mo:80/ch2/_definst_/ch2.live</span><br><span class="line">澳门澳视卫视,rtmp://live4.tdm.com.mo:80/ch3/_definst_/ch3.live</span><br><span class="line">澳门澳视体育,rtmp://live4.tdm.com.mo:80/ch4/_definst_/sport_ch4.live</span><br><span class="line">澳门澳视资讯,rtmp://live4.tdm.com.mo:80/ch5/_definst_/info_ch5.live</span><br><span class="line">澳门澳视高清,rtmp://live4.tdm.com.mo:80/ch6/_definst_/hd_ch6.live</span><br><span class="line">澳门莲花卫视,rtmp://live-rtmp.lotustv.duolaibo.cn/lotustv/5562e9e4d409d24c9600075c</span><br><span class="line">TVBS新闻台1,rtmp://dv2.tp33.net/sat/tv551</span><br><span class="line">TVBS新闻台2,rtmp://dv2.tp33.net/sat/tv552</span><br><span class="line">TVBS新闻台3,rtmp://dv2.tp33.net:1935/sat/tv551</span><br><span class="line">TVBS新闻台4,rtmp://dv2.tp33.net:1935/sat/tv552</span><br><span class="line">纬来育乐1,rtmp://dv2.tp33.net/sat/tv701</span><br><span class="line">纬来育乐2,rtmp://dv2.tp33.net/sat/tv702</span><br><span class="line">纬来育乐3,rtmp://dv2.tp33.net:1935/sat/tv701</span><br><span class="line">纬来育乐4,rtmp://dv2.tp33.net:1935/sat/tv702</span><br><span class="line">中視1,rtmp://dv2.tp33.net/sat/tv091</span><br><span class="line">中視2,rtmp://dv2.tp33.net/sat/tv092</span><br><span class="line">中视CTV3,rtmp://dv2.tp33.net:1935/sat/tv091</span><br><span class="line">中视CTV4,rtmp://dv2.tp33.net:1935/sat/tv092</span><br><span class="line">华视1,rtmp://dv2.tp33.net/sat/tv111</span><br><span class="line">华视2,rtmp://dv2.tp33.net/sat/tv112</span><br><span class="line">华视台3,rtmp://dv2.tp33.net:1935/sat/tv111</span><br><span class="line">华视台4,rtmp://dv2.tp33.net:1935/sat/tv112</span><br><span class="line">台视1,rtmp://dv2.tp33.net/sat/tv071</span><br><span class="line">台视2,rtmp://dv2.tp33.net/sat/tv072</span><br><span class="line">台视台3,rtmp://dv2.tp33.net:1935/sat/tv072</span><br><span class="line">台视台4,rtmp://dv2.tp33.net:1935/sat/tv071</span><br><span class="line">民视1,rtmp://dv2.tp33.net/sat/tv052</span><br><span class="line">民视2,rtmp://dv2.tp33.net/sat/tv051</span><br><span class="line">民视台3,rtmp://dv2.tp33.net:1935/sat/tv051</span><br><span class="line">民视台4,rtmp://dv2.tp33.net:1935/sat/tv052</span><br><span class="line">纬来日本1,rtmp://dv2.tp33.net/sat//tv761</span><br><span class="line">纬来日本2,rtmp://dv2.tp33.net/sat/tv762</span><br><span class="line">纬来日本3,rtmp://dv2.tp33.net:1935/sat/tv761</span><br><span class="line">纬来日本4,rtmp://dv2.tp33.net:1935/sat/tv762</span><br><span class="line">三立台湾,rtmp://dv2.ts33.net/sat/tv292</span><br><span class="line">纬来体育1,rtmp://dv2.ts33.net/sat/tv722</span><br><span class="line">纬来体育2,rtmp://dv2.tp33.net/sat/tv721</span><br><span class="line">纬来体育3,rtmp://dv2.tp33.net:1935/sat/tv721</span><br><span class="line">纬来体育4,rtmp://dv2.tp33.net:1935/sat/tv722</span><br><span class="line">东森财经新闻台1,rtmp://dv2.tp33.net/sat/tv571</span><br><span class="line">东森财经新闻台2,rtmp://dv2.tp33.net/sat/tv572</span><br><span class="line">东森财经新闻台3,rtmp://dv2.tp33.net:1935/sat/tv571</span><br><span class="line">东森财经新闻台4,rtmp://dv2.tp33.net:1935/sat/tv572</span><br></pre></td></tr></table></figure>
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
-            <p>原文链接: <a href="https://www.mizuka.top/2018/11/13/小微企业验证码破解/">https://www.mizuka.top/2018/11/13/小微企业验证码破解/</a>
-            <p>发表日期: <a href="https://www.mizuka.top/2018/11/13/小微企业验证码破解/">November 13th 2018, 12:07:25 pm</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2018/11/18/电视直播源分享/">https://www.mizuka.top/2018/11/18/电视直播源分享/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2018/11/18/电视直播源分享/">November 18th 2018, 12:58:16 pm</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -460,17 +427,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/11/18/电视直播源分享/" title= 电视直播源分享 >
-                    <div class="nextTitle">电视直播源分享</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/11/09/vscode插件分享/" title= vscode插件分享 >
-                    <div class="prevTitle">vscode插件分享</div>
+                <a href= "/2018/11/13/小微企业验证码破解/" title= 小微企业验证码破解 >
+                    <div class="prevTitle">小微企业验证码破解</div>
                 </a>
             
         </li>
@@ -591,7 +553,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小微企业查询系统git地址"><span class="toc-number">1.</span> <span class="toc-text">小微企业查询系统git地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.2.</span> <span class="toc-text">特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#觉得不错帮忙Star一下啦～"><span class="toc-number">1.2.1.</span> <span class="toc-text">觉得不错帮忙Star一下啦～</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#破解流程"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">破解流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是离线模式？"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">什么是离线模式？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#challenge在第一步我们已经获取了，问题是validate怎么获取-同时seccode就是validate加了一个-jordan而已"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">challenge在第一步我们已经获取了，问题是validate怎么获取? 同时seccode就是validate加了一个|jordan而已</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#restful-api"><span class="toc-number">1.2.2.</span> <span class="toc-text">restful-api</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#已经做了一个api形式的-直接在url内打入关键词即可爬取"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">已经做了一个api形式的 直接在url内打入关键词即可爬取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行步骤"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">运行步骤</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#你懂的"><span class="toc-number">1.</span> <span class="toc-text">你懂的</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

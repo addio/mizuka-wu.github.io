@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.mizuka.top/"/>
-  <updated>2018-11-13T04:07:48.188Z</updated>
+  <updated>2018-11-18T05:02:03.117Z</updated>
   <id>https://www.mizuka.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>电视直播源分享</title>
+    <link href="https://www.mizuka.top/2018/11/18/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E6%BA%90%E5%88%86%E4%BA%AB/"/>
+    <id>https://www.mizuka.top/2018/11/18/电视直播源分享/</id>
+    <published>2018-11-18T04:58:16.000Z</published>
+    <updated>2018-11-18T05:02:03.117Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="你懂的"><a href="#你懂的" class="headerlink" title="你懂的"></a>你懂的</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">凤凰中文,http://223.110.243.155:80/PLTV/3/224/3221226922/index.m3u8</span><br><span class="line">凤凰中文,http://223.110.245.139/PLTV/3/224/3221226922/index.m3u8</span><br><span class="line">凤凰中文,http://112.17.0.10:8085/ysten-business/live/fhchinese/yst.m3u8</span><br><span class="line">凤凰资讯,http://223.110.243.155:80/PLTV/3/224/3221226923/index.m3u8</span><br><span class="line">凤凰HD,http://223.82.250.72/live/fhchinese/1.m3u8</span><br><span class="line">凤凰香港,http://223.110.243.155:80/PLTV/3/224/3221226975/index.m3u8</span><br><span class="line">澳门赛马台,rtmp://mjcao-001.wecast.hk:1935/live/chinese</span><br><span class="line">澳丫卫视,http://stream.mastvnet.com/MASTV/sd/live.m3u8</span><br><span class="line">澳门卫视,http://stream.mastvnet.com/MSTV/SD/live.m3u8</span><br><span class="line">澳门澳视澳门,rtmp://live4.tdm.com.mo:80/ch1/_definst_/ch1.live</span><br><span class="line">澳门澳视葡文,rtmp://live4.tdm.com.mo:80/ch2/_definst_/ch2.live</span><br><span class="line">澳门澳视卫视,rtmp://live4.tdm.com.mo:80/ch3/_definst_/ch3.live</span><br><span class="line">澳门澳视体育,rtmp://live4.tdm.com.mo:80/ch4/_definst_/sport_ch4.live</span><br><span class="line">澳门澳视资讯,rtmp://live4.tdm.com.mo:80/ch5/_definst_/info_ch5.live</span><br><span class="line">澳门澳视高清,rtmp://live4.tdm.com.mo:80/ch6/_definst_/hd_ch6.live</span><br><span class="line">澳门莲花卫视,rtmp://live-rtmp.lotustv.duolaibo.cn/lotustv/5562e9e4d409d24c9600075c</span><br><span class="line">TVBS新闻台1,rtmp://dv2.tp33.net/sat/tv551</span><br><span class="line">TVBS新闻台2,rtmp://dv2.tp33.net/sat/tv552</span><br><span class="line">TVBS新闻台3,rtmp://dv2.tp33.net:1935/sat/tv551</span><br><span class="line">TVBS新闻台4,rtmp://dv2.tp33.net:1935/sat/tv552</span><br><span class="line">纬来育乐1,rtmp://dv2.tp33.net/sat/tv701</span><br><span class="line">纬来育乐2,rtmp://dv2.tp33.net/sat/tv702</span><br><span class="line">纬来育乐3,rtmp://dv2.tp33.net:1935/sat/tv701</span><br><span class="line">纬来育乐4,rtmp://dv2.tp33.net:1935/sat/tv702</span><br><span class="line">中視1,rtmp://dv2.tp33.net/sat/tv091</span><br><span class="line">中視2,rtmp://dv2.tp33.net/sat/tv092</span><br><span class="line">中视CTV3,rtmp://dv2.tp33.net:1935/sat/tv091</span><br><span class="line">中视CTV4,rtmp://dv2.tp33.net:1935/sat/tv092</span><br><span class="line">华视1,rtmp://dv2.tp33.net/sat/tv111</span><br><span class="line">华视2,rtmp://dv2.tp33.net/sat/tv112</span><br><span class="line">华视台3,rtmp://dv2.tp33.net:1935/sat/tv111</span><br><span class="line">华视台4,rtmp://dv2.tp33.net:1935/sat/tv112</span><br><span class="line">台视1,rtmp://dv2.tp33.net/sat/tv071</span><br><span class="line">台视2,rtmp://dv2.tp33.net/sat/tv072</span><br><span class="line">台视台3,rtmp://dv2.tp33.net:1935/sat/tv072</span><br><span class="line">台视台4,rtmp://dv2.tp33.net:1935/sat/tv071</span><br><span class="line">民视1,rtmp://dv2.tp33.net/sat/tv052</span><br><span class="line">民视2,rtmp://dv2.tp33.net/sat/tv051</span><br><span class="line">民视台3,rtmp://dv2.tp33.net:1935/sat/tv051</span><br><span class="line">民视台4,rtmp://dv2.tp33.net:1935/sat/tv052</span><br><span class="line">纬来日本1,rtmp://dv2.tp33.net/sat//tv761</span><br><span class="line">纬来日本2,rtmp://dv2.tp33.net/sat/tv762</span><br><span class="line">纬来日本3,rtmp://dv2.tp33.net:1935/sat/tv761</span><br><span class="line">纬来日本4,rtmp://dv2.tp33.net:1935/sat/tv762</span><br><span class="line">三立台湾,rtmp://dv2.ts33.net/sat/tv292</span><br><span class="line">纬来体育1,rtmp://dv2.ts33.net/sat/tv722</span><br><span class="line">纬来体育2,rtmp://dv2.tp33.net/sat/tv721</span><br><span class="line">纬来体育3,rtmp://dv2.tp33.net:1935/sat/tv721</span><br><span class="line">纬来体育4,rtmp://dv2.tp33.net:1935/sat/tv722</span><br><span class="line">东森财经新闻台1,rtmp://dv2.tp33.net/sat/tv571</span><br><span class="line">东森财经新闻台2,rtmp://dv2.tp33.net/sat/tv572</span><br><span class="line">东森财经新闻台3,rtmp://dv2.tp33.net:1935/sat/tv571</span><br><span class="line">东森财经新闻台4,rtmp://dv2.tp33.net:1935/sat/tv572</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;你懂的&quot;&gt;&lt;a href=&quot;#你懂的&quot; class=&quot;headerlink&quot; title=&quot;你懂的&quot;&gt;&lt;/a&gt;你懂的&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;s
+      
+    
+    </summary>
+    
+      <category term="可以公开的情报" scheme="https://www.mizuka.top/categories/%E5%8F%AF%E4%BB%A5%E5%85%AC%E5%BC%80%E7%9A%84%E6%83%85%E6%8A%A5/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>小微企业验证码破解</title>
