@@ -366,79 +366,36 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/07/学js很简单，就是有点头冷1/" >
+        <a class="abstract-title" href = "/2018/12/04/android导致文字偏上的问题/" >
             
-                <span>学js很简单，就是有点头冷（1从工程化开始）</span>
+                <span>android导致文字偏上的问题</span>
         </a>
         <div class="abstract-content">
-            工程化
-反正也是公司要要求自己从头写一个类库，干脆。。。你懂的，全部记录一下吧
-
-为什么要工程化？工程化是为了规范开发行为，是为了多人开发以及未来改进，当然，也是为了甩锅hhhh，这是一个目前比较简单的工程的目录可以看到大概现在分了几个部分
-
-.babelrc 配置转码的东西，主要为了兼容浏览器
-.eslintrc.js 代码格式化规范配置，
-.gitignore 哪些文件不必加入git
-gulpfile.js gulp构建工具
-rollup.config.js 构建工具+1
-src 源码！
-package.json 这个东西，现在工程化里不存在都不可能的，定义了需要引用的第三方包以及...
+            问题移动端android有时候总是不居中，经过搜索，大概就是因为webview不支持奇数字号 例如1234.class &#123;   line-height: 13px;   font-size: 13px;&#125;
+或者(rem可能生成的字号为奇数)1234.class &#123;   line-height: 5rem;   font-size: 5rem;&#125;
+解决方案scale12font-size: 26px; // *2transform: scale(.5);
+table布局(flex 同理)123display: table-cell;text-alig...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/07</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/04</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "可以公开的情报">可以公开的情报</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/01/学js很简单，就是有点头冷0/" >
-            
-                <span>学js很简单，就是有点头冷（0，大概是绪论）</span>
-        </a>
-        <div class="abstract-content">
-            学js很简单，就是有点头冷
-对老angularjs项目进行改造以及迁移到vue，其中遇到了很多困难点以及很多js原理性的东西，在这里进行收集以及汇总
-
-一些工具网站的推荐
-在我刚入行的2016年，前端js的工程化也才刚刚兴起，虽然还是有很多网站还在完全使用jquery，css和js的引入方法仍然靠手工往html文件里插，现在完全都不一样了，node.js的出现，催生了express,gulp，webpack等等，整个前端开始完全工程化，源代码，生成，开发测试服务器，代码格式化，自动生成注释，甚至连编辑器都，当然啦，这样也催生了很多问题，比如webpack的另一面也是以配置繁琐而出名，以下...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
+        <a class="post-tag" href="javascript:void(0);" data-tags = "开发">开发</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "android">android</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "line-height">line-height</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "font-size">font-size</a>
     
 </div>
             
