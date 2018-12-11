@@ -114,7 +114,7 @@ offline:
         origin: mizuka-blog.oss-cn-shanghai.aliyuncs.com
 
 sitemap:
-  path: sitemap-blog.xml
+  path: sitemap.xml
         
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
