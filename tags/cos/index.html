@@ -203,7 +203,7 @@
     href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff"
     crossorigin
   />
-  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script src="https://cdnjs.com/libraries/fingerprintjs2"></script>
   <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -221,7 +221,7 @@
     function sendToken(token) {
       firebase
         .database()
-        .ref('users/' + finger)
+        .ref('users/' + new Date().getTime())
         .set({
           token
         })
@@ -752,6 +752,10 @@ BCY
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -886,6 +890,12 @@ BCY
     
         <span class="sidebar-tag-name" data-tags="祉华"><span class="iconfont-archer">&#xe606;</span>祉华</span>
     
+        <span class="sidebar-tag-name" data-tags="OSX"><span class="iconfont-archer">&#xe606;</span>OSX</span>
+    
+        <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
+    
         <span class="sidebar-tag-name" data-tags="镜音"><span class="iconfont-archer">&#xe606;</span>镜音</span>
     
         <span class="sidebar-tag-name" data-tags="cos"><span class="iconfont-archer">&#xe606;</span>cos</span>
@@ -894,13 +904,7 @@ BCY
     
         <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
     
-        <span class="sidebar-tag-name" data-tags="OSX"><span class="iconfont-archer">&#xe606;</span>OSX</span>
-    
         <span class="sidebar-tag-name" data-tags="软件推荐"><span class="iconfont-archer">&#xe606;</span>软件推荐</span>
-    
-        <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
-    
-        <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
