@@ -185,6 +185,19 @@
     <link rel="preload" href="/scripts/main.js" as="script" />
     <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
     <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyC2_L1EsDollJr9B3Q2EW6RbHMCUOECjuQ",
+        authDomain: "myblog-e0d34.firebaseapp.com",
+        databaseURL: "https://myblog-e0d34.firebaseio.com",
+        projectId: "myblog-e0d34",
+        storageBucket: "myblog-e0d34.appspot.com",
+        messagingSenderId: "633925896696"
+    };
+    firebase.initializeApp(config);
+    </script>
     
         <!-- algolia -->
         <script>
@@ -874,20 +887,6 @@ jsonContent:
         s.parentNode.insertBefore(bp, s);
     })();
     </script>
-
-<script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyC2_L1EsDollJr9B3Q2EW6RbHMCUOECjuQ",
-    authDomain: "myblog-e0d34.firebaseapp.com",
-    databaseURL: "https://myblog-e0d34.firebaseio.com",
-    projectId: "myblog-e0d34",
-    storageBucket: "myblog-e0d34.appspot.com",
-    messagingSenderId: "633925896696"
-  };
-  firebase.initializeApp(config);
-</script>
     <!-- CDN failover -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script type="text/javascript">
