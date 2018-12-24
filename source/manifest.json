@@ -12,7 +12,8 @@
     "background_color": "transparent",
     "related_applications": [],
     "prefer_related_applications": false,
-    "gcm_sender_id": "103953800507",
+    "gcm_sender_id": "482941778795",
+    "gcm_sender_id_comment": "Do not change the GCM Sender ID",
     "icons": [{
       "src": "/assets/logo-32.png",
       "sizes": "32x32",
