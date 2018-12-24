@@ -235,7 +235,7 @@
               )
               // Show permission UI.
               updateUIForPushPermissionRequired()
-              setTokenSentToServer(false)
+              setTokenSentToServer(true)
             }
           })
           .catch(function(err) {
@@ -255,7 +255,7 @@
           console.log('Token refreshed.')
           // Indicate that the new Instance ID token has not yet been sent to the
           // app server.
-          setTokenSentToServer(false)
+          setTokenSentToServer(true)
           // Send Instance ID token to app server.
           sendTokenToServer(refreshedToken)
           // ...
@@ -678,12 +678,6 @@ height:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -794,14 +788,6 @@ height:50vh;
     
         <span class="sidebar-tag-name" data-tags="font-size"><span class="iconfont-archer">&#xe606;</span>font-size</span>
     
-        <span class="sidebar-tag-name" data-tags="笔记"><span class="iconfont-archer">&#xe606;</span>笔记</span>
-    
-        <span class="sidebar-tag-name" data-tags="学习"><span class="iconfont-archer">&#xe606;</span>学习</span>
-    
-        <span class="sidebar-tag-name" data-tags="记录"><span class="iconfont-archer">&#xe606;</span>记录</span>
-    
-        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
-    
         <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
     
         <span class="sidebar-tag-name" data-tags="ecmascript"><span class="iconfont-archer">&#xe606;</span>ecmascript</span>
@@ -813,6 +799,14 @@ height:50vh;
         <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
     
         <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="笔记"><span class="iconfont-archer">&#xe606;</span>笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="学习"><span class="iconfont-archer">&#xe606;</span>学习</span>
+    
+        <span class="sidebar-tag-name" data-tags="记录"><span class="iconfont-archer">&#xe606;</span>记录</span>
+    
+        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
     
         <span class="sidebar-tag-name" data-tags="日常"><span class="iconfont-archer">&#xe606;</span>日常</span>
     
