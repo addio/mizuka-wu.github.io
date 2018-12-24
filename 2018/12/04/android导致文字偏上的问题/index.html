@@ -209,73 +209,16 @@
     href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff"
     crossorigin
   />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/2.0.3/fingerprint2.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: 'AIzaSyC2_L1EsDollJr9B3Q2EW6RbHMCUOECjuQ',
-      authDomain: 'myblog-e0d34.firebaseapp.com',
-      databaseURL: 'https://myblog-e0d34.firebaseio.com',
-      projectId: 'myblog-e0d34',
-      storageBucket: 'myblog-e0d34.appspot.com',
-      messagingSenderId: '633925896696'
-    }
-    firebase.initializeApp(config)
-
-    function sendToken(token) {
-      Fingerprint2.get({}, function(components) {
-        var values = components.map(function (component) { return component.value })
-        var result = Fingerprint2.x64hash128(values.join(''), 31)
-        firebase
-        .database()
-        .ref('users/' + result)
-        .set({
-          token
-        })
-      })
-    }
-
-    var messaging = firebase.messaging()
-    var database = firebase.database()
-    messaging.usePublicVapidKey(
-      'BNeTtxbWEu89hWH5rlQp64gSVnTnGTdj6nPZFnsT-zDtG-Kt0_aEEJbG0eD11uuP6jHvPSMxOYbZWRyT2xnCdG0'
-    )
-    messaging
-      .requestPermission()
-      .then(function() {
-        console.log('Notification permission granted.')
-        messaging
-          .getToken()
-          .then(function(currentToken) {
-            if (currentToken) {
-              sendToken(currentToken)
-            } else {
-              // Show permission request.
-              console.log(
-                'No Instance ID token available. Request permission to generate one.'
-              )
-            }
-          })
-          .catch(function(err) {
-            console.log('An error occurred while retrieving token. ', err)
-          })
-      })
-      .catch(function(err) {
-        console.log('Unable to get permission to notify.', err)
-      })
-    // Callback fired if Instance ID token is updated.
-    messaging.onTokenRefresh(function() {
-      messaging
-        .getToken()
-        .then(function(refreshedToken) {
-          sendToken(refreshedToken)
-        })
-        .catch(function(err) {
-          console.log('Unable to retrieve refreshed token ', err)
-        })
-    })
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "be52f03a-12a9-4767-bf91-87573f9fa9f0",
+      });
+    });
   </script>
+
   
   <!-- algolia -->
   <script>
@@ -393,11 +336,11 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+    
         <a class="post-tag" href="javascript:void(0);" data-tags = "可以公开的情报">可以公开的情报</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "开发">开发</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "android">android</a>
     
@@ -829,6 +772,30 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -927,18 +894,6 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="插件"><span class="iconfont-archer">&#xe606;</span>插件</span>
     
-        <span class="sidebar-tag-name" data-tags="可以公开的情报"><span class="iconfont-archer">&#xe606;</span>可以公开的情报</span>
-    
-        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
-    
-        <span class="sidebar-tag-name" data-tags="android"><span class="iconfont-archer">&#xe606;</span>android</span>
-    
-        <span class="sidebar-tag-name" data-tags="line-height"><span class="iconfont-archer">&#xe606;</span>line-height</span>
-    
-        <span class="sidebar-tag-name" data-tags="font-size"><span class="iconfont-archer">&#xe606;</span>font-size</span>
-    
         <span class="sidebar-tag-name" data-tags="笔记"><span class="iconfont-archer">&#xe606;</span>笔记</span>
     
         <span class="sidebar-tag-name" data-tags="学习"><span class="iconfont-archer">&#xe606;</span>学习</span>
@@ -947,27 +902,31 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
     
-        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
-    
-        <span class="sidebar-tag-name" data-tags="ecmascript"><span class="iconfont-archer">&#xe606;</span>ecmascript</span>
-    
-        <span class="sidebar-tag-name" data-tags="数组"><span class="iconfont-archer">&#xe606;</span>数组</span>
-    
-        <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
     
         <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
     
         <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
-    
-        <span class="sidebar-tag-name" data-tags="日常"><span class="iconfont-archer">&#xe606;</span>日常</span>
-    
-        <span class="sidebar-tag-name" data-tags="祉华"><span class="iconfont-archer">&#xe606;</span>祉华</span>
     
         <span class="sidebar-tag-name" data-tags="OSX"><span class="iconfont-archer">&#xe606;</span>OSX</span>
     
         <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
     
         <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
+    
+        <span class="sidebar-tag-name" data-tags="可以公开的情报"><span class="iconfont-archer">&#xe606;</span>可以公开的情报</span>
+    
+        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="android"><span class="iconfont-archer">&#xe606;</span>android</span>
+    
+        <span class="sidebar-tag-name" data-tags="line-height"><span class="iconfont-archer">&#xe606;</span>line-height</span>
+    
+        <span class="sidebar-tag-name" data-tags="font-size"><span class="iconfont-archer">&#xe606;</span>font-size</span>
+    
+        <span class="sidebar-tag-name" data-tags="日常"><span class="iconfont-archer">&#xe606;</span>日常</span>
+    
+        <span class="sidebar-tag-name" data-tags="祉华"><span class="iconfont-archer">&#xe606;</span>祉华</span>
     
         <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
     
@@ -978,6 +937,14 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="cos"><span class="iconfont-archer">&#xe606;</span>cos</span>
     
         <span class="sidebar-tag-name" data-tags="镜音len"><span class="iconfont-archer">&#xe606;</span>镜音len</span>
+    
+        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
+    
+        <span class="sidebar-tag-name" data-tags="ecmascript"><span class="iconfont-archer">&#xe606;</span>ecmascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="数组"><span class="iconfont-archer">&#xe606;</span>数组</span>
+    
+        <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
