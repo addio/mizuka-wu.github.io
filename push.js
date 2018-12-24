@@ -19,8 +19,6 @@ var message = {
   }
 }
 
-console.log(admin.messaging())
-
 // Send a message to devices subscribed to the provided topic.
 admin
   .messaging()
