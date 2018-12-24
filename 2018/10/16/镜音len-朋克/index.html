@@ -213,7 +213,6 @@
   <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
   <script>
     // Initialize Firebase
-    var finger = returnCitySN["cip"]+','+returnCitySN["cname"]
     var config = {
       apiKey: 'AIzaSyC2_L1EsDollJr9B3Q2EW6RbHMCUOECjuQ',
       authDomain: 'myblog-e0d34.firebaseapp.com',
@@ -225,12 +224,14 @@
     firebase.initializeApp(config)
 
     function sendToken(token) {
-      firebase
+      new Fingerprint2().get(function(result) {
+        firebase
         .database()
-        .ref('users/' + new Date().getTime())
+        .ref('users/' + result)
         .set({
           token
         })
+      })
     }
 
     var messaging = firebase.messaging()
@@ -823,10 +824,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -967,15 +964,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
     
+        <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
+    
+        <span class="sidebar-tag-name" data-tags="软件推荐"><span class="iconfont-archer">&#xe606;</span>软件推荐</span>
+    
         <span class="sidebar-tag-name" data-tags="镜音"><span class="iconfont-archer">&#xe606;</span>镜音</span>
     
         <span class="sidebar-tag-name" data-tags="cos"><span class="iconfont-archer">&#xe606;</span>cos</span>
     
         <span class="sidebar-tag-name" data-tags="镜音len"><span class="iconfont-archer">&#xe606;</span>镜音len</span>
-    
-        <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
-    
-        <span class="sidebar-tag-name" data-tags="软件推荐"><span class="iconfont-archer">&#xe606;</span>软件推荐</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
