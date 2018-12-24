@@ -7,16 +7,12 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js')
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 firebase.initializeApp({
-  messagingSenderId: 'myblog-e0d34'
+  messagingSenderId: '633925896696'
 })
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
-const messaging = firebase.messaging()
-messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload)
-  // ...
-})
+var messaging = firebase.messaging()
 
 messaging.setBackgroundMessageHandler(function(payload) {
   console.log(
