@@ -218,7 +218,9 @@
     firebase.initializeApp(config)
 
     function sendToken(token) {
-      new Fingerprint2().get(function(result) {
+      Fingerprint2.get({}, function(components) {
+        var values = components.map(function (component) { return component.value })
+        var result = Fingerprint2.x64hash128(values.join(''), 31)
         firebase
         .database()
         .ref('users/' + result)
@@ -619,8 +621,6 @@ background 给编辑器窗口加个背景！唯一的缺点是vscode会显示�
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     

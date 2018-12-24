@@ -218,7 +218,9 @@
     firebase.initializeApp(config)
 
     function sendToken(token) {
-      new Fingerprint2().get(function(result) {
+      Fingerprint2.get({}, function(components) {
+        var values = components.map(function (component) { return component.value })
+        var result = Fingerprint2.x64hash128(values.join(''), 31)
         firebase
         .database()
         .ref('users/' + result)
@@ -581,8 +583,6 @@ Heic格式如果你使用过apple的live photo 就会发现其导出的格式就
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
