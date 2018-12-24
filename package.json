@@ -16,6 +16,7 @@
     "version": "3.7.1"
   },
   "dependencies": {
+    "firebase-admin": "^6.4.0",
     "hexo": "^3.7.1",
     "hexo-algolia": "^1.2.5",
     "hexo-deployer-git": "^0.3.1",
