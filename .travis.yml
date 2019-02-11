@@ -10,4 +10,4 @@ before_script:
   - npm install -g hexo
 
 script:
-  - deploy-index
+  - npm run deploy-index
