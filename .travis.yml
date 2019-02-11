@@ -5,9 +5,6 @@ branches:
   only:
     - blog
 
-before_script:
-  - npm install -g hexo
-
 script:
   - npm run start
   - npm run index
