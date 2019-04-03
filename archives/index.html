@@ -401,6 +401,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/04/03/webpack正确的引入pdfjs/" >
+            
+                <span>webpack正确的引入pdf.js</span>
+        </a>
+        <div class="abstract-content">
+            pdf.js废话不多说,直接上代码
+1import pdfjs from 'pdfjs-dist/webpack'
+简单明了，不用考虑 pdf.worker.js,不用考虑 cdn
+附上最近做的 pdf 生成和导出的两个库的基础配置123456789101112131415161718192021import pdfMake from 'pdfmake-support-chinese-fonts/pdfmake.min'import pdfFonts from 'pdfmake-support-chinese-fonts/vfs_fonts'import pdfjs from 'pdfj...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "学习">学习</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "记录">记录</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "vscode">vscode</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/03/29/axios如何中断请求/" >
             
                 <span>axios如何中断请求</span>
@@ -752,45 +790,6 @@ package.json 这个东西，现在工程化里不存在都不可能的，定义�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/01/学js很简单，就是有点头冷0/" >
-            
-                <span>学js很简单，就是有点头冷（0，大概是绪论）</span>
-        </a>
-        <div class="abstract-content">
-            学js很简单，就是有点头冷
-对老angularjs项目进行改造以及迁移到vue，其中遇到了很多困难点以及很多js原理性的东西，在这里进行收集以及汇总
-
-一些工具网站的推荐
-在我刚入行的2016年，前端js的工程化也才刚刚兴起，虽然还是有很多网站还在完全使用jquery，css和js的引入方法仍然靠手工往html文件里插，现在完全都不一样了，node.js的出现，催生了express,gulp，webpack等等，整个前端开始完全工程化，源代码，生成，开发测试服务器，代码格式化，自动生成注释，甚至连编辑器都，当然啦，这样也催生了很多问题，比如webpack的另一面也是以配置繁琐而出名，以下...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "教程">教程</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -1065,9 +1064,24 @@ package.json 这个东西，现在工程化里不存在都不可能的，定义�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 16
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -1084,6 +1098,11 @@ package.json 这个东西，现在工程化里不存在都不可能的，定义�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2019/04/03/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
+        </li>
     
     
         <li class="archive-post-item">
