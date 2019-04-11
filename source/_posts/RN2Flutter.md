@@ -36,3 +36,6 @@ ps: cocoa太慢的话看[这个](http://www.cnblogs.com/zhuyanboyue/p/6118950.ht
 
 ### 杀进程
 ```ps aux|grep flutter|awk '{print $2}'|xargs kill -9```
+
+### 各种问题解决
+[url](https://adolphor.com/blog/2018/09/09/error-and-solution-in-flutter.html)
