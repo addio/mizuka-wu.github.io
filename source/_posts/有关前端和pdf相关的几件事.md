@@ -1,5 +1,5 @@
 ---
-title: 教你如何构建Mojave动态壁纸
+title: 有关前端和pdf相关的几件事
 date: 2019-04-10 13:46:10
 tags: 
     - javascript
