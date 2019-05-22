@@ -38,4 +38,4 @@ ps: cocoa太慢的话看[这个](http://www.cnblogs.com/zhuyanboyue/p/6118950.ht
 ```ps aux|grep flutter|awk '{print $2}'|xargs kill -9```
 
 ### 各种问题解决
-[url](https://adolphor.com/blog/2018/09/09/error-and-solution-in-flutter.html)
+[url](https://www.itfanr.cc/2019/03/08/flutter-devemopment-environment-configuration/)
