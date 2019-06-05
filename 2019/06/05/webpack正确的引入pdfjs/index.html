@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <!-- title -->
-  
-
+   
 <head>
   <meta charset="utf-8" />
   <meta
@@ -16,7 +15,7 @@
   <meta name="description" content="水华的博客，coser和前端记录" />
   <meta name="Cache-Control" content="no-cache" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>水华的博客</title>
+  <title>webpack正确的引入pdf.js · 水华的博客</title>
   <link rel="manifest" href="/manifest.json" />
   <style type="text/css">
     @font-face {
@@ -277,7 +276,7 @@
                 <a href="/" >水华的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name"></a>
+                <a href="#" class="post-name">webpack正确的引入pdf.js</a>
             </div>
     </div>
     
@@ -309,7 +308,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            [Untitled Post]
+            webpack正确的引入pdf.js
             <!-- 404 -->
             
         </h1>
@@ -326,14 +325,26 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "学习">学习</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "记录">记录</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "vscode">vscode</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">147</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">131</span> / Reading time: <span class="post-count">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/05/22</span>
+                    <span class="post-intro-time">2019/06/05</span>
                     
                     <span class="shareWrapper">
                         <span class="iconfont-archer shareIcon">&#xe71d;</span>
@@ -452,24 +463,18 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="RN2Flutter"><a href="#RN2Flutter" class="headerlink" title="RN2Flutter"></a>RN2Flutter</h1><h2 id="Flutter环境安装"><a href="#Flutter环境安装" class="headerlink" title="Flutter环境安装"></a>Flutter环境安装</h2><p>fultter需要安装配置环境，主要是dart和flutter，vscode需要安装flutter插件</p>
-<h3 id="dart"><a href="#dart" class="headerlink" title="dart"></a>dart</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap dart-lang/dart</span><br><span class="line">brew install dart</span><br></pre></td></tr></table></figure>
-<p>dart 安装完成</p>
-<h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><p>使用第三方传入到brew的镜像进行安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap MiderWong/flutter</span><br><span class="line">brew install flutter</span><br></pre></td></tr></table></figure>
-<h3 id="其他依赖"><a href="#其他依赖" class="headerlink" title="其他依赖"></a>其他依赖</h3><p>设定依赖为国内镜像之后进行自动安装即可<br>.zshrc .bash_profile都需要加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PUB_HOSTED_URL=https://dart-pub.mirrors.sjtug.sjtu.edu.cn</span><br><span class="line"><span class="built_in">export</span> FLUTTER_STORAGE_BASE_URL=https://mirrors.sjtug.sjtu.edu.cn</span><br><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
-<p>之后按照提示修复即可<br>ps: cocoa太慢的话看<a href="http://www.cnblogs.com/zhuyanboyue/p/6118950.html" target="_blank" rel="noopener">这个</a></p>
-<h3 id="杀进程"><a href="#杀进程" class="headerlink" title="杀进程"></a>杀进程</h3><p><code>ps aux|grep flutter|awk &#39;{print $2}&#39;|xargs kill -9</code></p>
-<h3 id="各种问题解决"><a href="#各种问题解决" class="headerlink" title="各种问题解决"></a>各种问题解决</h3><p><a href="https://www.itfanr.cc/2019/03/08/flutter-devemopment-environment-configuration/" target="_blank" rel="noopener">url</a></p>
+        <h1 id="pdf-js"><a href="#pdf-js" class="headerlink" title="pdf.js"></a>pdf.js</h1><p>废话不多说,直接上代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdfjs <span class="keyword">from</span> <span class="string">'pdfjs-dist/webpack'</span></span><br></pre></td></tr></table></figure>
+<p>简单明了，不用考虑 pdf.worker.js,不用考虑 cdn</p>
+<h2 id="附上最近做的-pdf-生成和导出的两个库的基础配置"><a href="#附上最近做的-pdf-生成和导出的两个库的基础配置" class="headerlink" title="附上最近做的 pdf 生成和导出的两个库的基础配置"></a>附上最近做的 pdf 生成和导出的两个库的基础配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdfMake <span class="keyword">from</span> <span class="string">'pdfmake-support-chinese-fonts/pdfmake.min'</span></span><br><span class="line"><span class="keyword">import</span> pdfFonts <span class="keyword">from</span> <span class="string">'pdfmake-support-chinese-fonts/vfs_fonts'</span></span><br><span class="line"><span class="keyword">import</span> pdfjs <span class="keyword">from</span> <span class="string">'pdfjs-dist/webpack'</span></span><br><span class="line">pdfMake.vfs = pdfFonts.pdfMake.vfs</span><br><span class="line">pdfMake.fonts = &#123;</span><br><span class="line">  Roboto: &#123;</span><br><span class="line">    normal: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    bold: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    italics: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    bolditalics: <span class="string">'Roboto-Regular.ttf'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fangzhen: &#123;</span><br><span class="line">    normal: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    bold: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    italics: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    bolditalics: <span class="string">'fzhei-jt.TTF'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> pdfMaker = pdfMake</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> pdfViewer = pdfjs</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
-            <p>原文链接: <a href="https://www.mizuka.top/2019/05/22/RN2Flutter/">https://www.mizuka.top/2019/05/22/RN2Flutter/</a>
-            <p>发表日期: <a href="https://www.mizuka.top/2019/05/22/RN2Flutter/">May 22nd 2019, 5:52:52 am</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2019/06/05/webpack正确的引入pdfjs/">https://www.mizuka.top/2019/06/05/webpack正确的引入pdfjs/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2019/06/05/webpack正确的引入pdfjs/">June 5th 2019, 8:06:08 am</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -478,16 +483,16 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/05/22/API 变动/" title=  >
-                    <div class="nextTitle">[Untitled Post]</div>
+                <a href= "/2019/06/05/如何删除除了Master之外的所有分支/" title= 如何删除除了Master之外的所有分支 >
+                    <div class="nextTitle">如何删除除了Master之外的所有分支</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/04/10/有关前端和pdf相关的几件事/" title= 有关前端和pdf相关的几件事 >
-                    <div class="prevTitle">有关前端和pdf相关的几件事</div>
+                <a href= "/2019/06/05/RN2Flutter/" title=  >
+                    <div class="prevTitle">[Untitled Post]</div>
                 </a>
             
         </li>
@@ -608,7 +613,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RN2Flutter"><span class="toc-number">1.</span> <span class="toc-text">RN2Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter环境安装"><span class="toc-number">1.1.</span> <span class="toc-text">Flutter环境安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dart"><span class="toc-number">1.1.1.</span> <span class="toc-text">dart</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter"><span class="toc-number">1.1.2.</span> <span class="toc-text">Flutter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他依赖"><span class="toc-number">1.1.3.</span> <span class="toc-text">其他依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杀进程"><span class="toc-number">1.1.4.</span> <span class="toc-text">杀进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#各种问题解决"><span class="toc-number">1.1.5.</span> <span class="toc-text">各种问题解决</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pdf-js"><span class="toc-number">1.</span> <span class="toc-text">pdf.js</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#附上最近做的-pdf-生成和导出的两个库的基础配置"><span class="toc-number">1.1.</span> <span class="toc-text">附上最近做的 pdf 生成和导出的两个库的基础配置</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -621,10 +626,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
     
     
     
@@ -895,6 +896,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2019/06/05/如何删除除了Master之外的所有分支/" >如何删除除了Master之外的所有分支</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2019/04/10/有关前端和pdf相关的几件事/" >有关前端和pdf相关的几件事</a>
         </li>
     
@@ -953,17 +959,13 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷0/" >学js很简单，就是有点头冷（0，大概是绪论）</a>
+        </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/05/22/API 变动/" >[Untitled Post]</a>
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/情侣日常1/" >情侣日常1</a>
         </li>
     
     
@@ -977,21 +979,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/05/22/RN2Flutter/" >[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/05/22/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/06/05/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
         </li>
     
     
@@ -1005,18 +993,31 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷0/" >学js很简单，就是有点头冷（0，大概是绪论）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/情侣日常1/" >情侣日常1</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2018/10/18/从js数组重查找出重复元素的方法/" >从js数组重查找出重复元素的方法</a>
         </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/06/05/RN2Flutter/" >[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -1025,12 +1026,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
         </li>
     
     
