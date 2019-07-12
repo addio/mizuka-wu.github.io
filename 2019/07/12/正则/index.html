@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+   
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  />
+  <meta name="author" content="Mizuka" />
+  <meta name="renderer" content="webkit" />
+  <meta name="copyright" content="Mizuka" />
+  <meta name="keywords" content="水华的博客 | Mizuka" />
+  <meta name="description" content="水华的博客，coser和前端记录" />
+  <meta name="Cache-Control" content="no-cache" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>常用正则 · 水华的博客</title>
+  <link rel="manifest" href="/manifest.json" />
+  <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+ <link rel="preload" href= /css/style.css?v=20180709 as="style"
+  onload="this.onload=null;this.rel='stylesheet'" /> <link rel="stylesheet"
+  href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+  
+  <link
+    rel="preload"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+   <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js"
+    as="script"
+  />
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+    as="script"
+  />
+  <link rel="preload" href="/scripts/main.js" as="script" />
+  <link
+    rel="preload"
+    as="font"
+    href="/font/Oswald-Regular.ttf"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    as="font"
+    href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff"
+    crossorigin
+  />
+
+  
+  <!-- algolia -->
+  <script>
+    
+    var hits = JSON.parse('{"per_page":10}')
+    var labels = JSON.parse('{"input_placeholder":"搜索模式，启动！","hits_empty":"什么都没找到呢～","hits_stats":"搜索到了${hits}条结果！ （${time} ms）"}')
+
+    var algolia = {
+        applicationID: '30Y4O0O0A2',
+        apiKey: '16bdbd3e031ecae9ae00c3626d819d64',
+        indexName: 'Blog',
+        hits: hits,
+        labels: labels
+    }
+  </script>
+  
+  <!-- fancybox -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"
+    defer
+  ></script>
+  <!-- 百度统计  -->
+  
+  <!-- 谷歌统计  -->
+  
+  <script>
+    ;(function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r
+      ;(i[r] =
+        i[r] ||
+        function() {
+          ;(i[r].q = i[r].q || []).push(arguments)
+        }),
+        (i[r].l = 1 * new Date())
+      ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+      a.async = 1
+      a.src = g
+      m.parentNode.insertBefore(a, m)
+    })(
+      window,
+      document,
+      'script',
+      'https://www.google-analytics.com/analytics.js',
+      'ga'
+    )
+    ga('create', 'UA-112738831-1', 'auto')
+    ga('send', 'pageview')
+  </script>
+  
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >水华的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">常用正则</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>水华的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            常用正则
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "可以公开的情报">可以公开的情报</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "开发">开发</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1.8k</span> / Reading time: <span class="post-count">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/12</span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="正则大全"><a href="#正则大全" class="headerlink" title="正则大全   "></a>正则大全 <img src="https://img.shields.io/badge/状态-积极更新-673ab7.svg" alt=""> <img src="https://img.shields.io/badge/已收录-47条-4caf50.svg" alt=""> <img src="https://img.shields.io/badge/license-MIT-F44336.svg" alt=""></h1><p>:whale:图形界面: <a href="https://any86.github.io/any-rule/" target="_blank" rel="noopener">https://any86.github.io/any-rule/</a></p>
+<h2 id="html-注释"><a href="#html-注释" class="headerlink" title="html 注释"></a>html 注释</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&lt;!--(.*?)--&gt;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="md5-格式-32-位"><a href="#md5-格式-32-位" class="headerlink" title="md5 格式(32 位)"></a>md5 格式(32 位)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-f0<span class="number">-9</span>]&#123;<span class="number">32</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="版本号格式必须为-X-Y-Z"><a href="#版本号格式必须为-X-Y-Z" class="headerlink" title="版本号格式必须为 X.Y.Z"></a>版本号格式必须为 X.Y.Z</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d+(\.\d+)&#123;<span class="number">2</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="视频链接地址（视频格式可按需增删）"><a href="#视频链接地址（视频格式可按需增删）" class="headerlink" title="视频链接地址（视频格式可按需增删）"></a>视频链接地址（视频格式可按需增删）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^https?:\/\/.*?(swf|avi|flv|mpg|rm|mov|wav|asf|<span class="number">3</span>gp|mkv|rmvb|mp4)$/i;</span><br></pre></td></tr></table></figure>
+<h2 id="图片链接地址（图片格式可按需增删）"><a href="#图片链接地址（图片格式可按需增删）" class="headerlink" title="图片链接地址（图片格式可按需增删）"></a>图片链接地址（图片格式可按需增删）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^https?:\/\/.*?(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif)$/i;</span><br></pre></td></tr></table></figure>
+<h2 id="24-小时制时间（HH-mm-ss）"><a href="#24-小时制时间（HH-mm-ss）" class="headerlink" title="24 小时制时间（HH:mm:ss）"></a>24 小时制时间（HH:mm:ss）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^((?:[<span class="number">01</span>]\d|<span class="number">2</span>[<span class="number">0</span><span class="number">-3</span>]):[<span class="number">0</span><span class="number">-5</span>]\d:[<span class="number">0</span><span class="number">-5</span>]\d$)/;</span><br></pre></td></tr></table></figure>
+<h2 id="12-小时制时间（hh-mm-ss）"><a href="#12-小时制时间（hh-mm-ss）" class="headerlink" title="12 小时制时间（hh:mm:ss）"></a>12 小时制时间（hh:mm:ss）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(<span class="number">1</span>[<span class="number">0</span><span class="number">-2</span>]|<span class="number">0</span>?[<span class="number">1</span><span class="number">-9</span>]):[<span class="number">0</span><span class="number">-5</span>]\d:[<span class="number">0</span><span class="number">-5</span>]\d$/;</span><br></pre></td></tr></table></figure>
+<h2 id="base64-格式"><a href="#base64-格式" class="headerlink" title="base64 格式"></a>base64 格式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\s*data:([a-z]+\/[a-z0<span class="number">-9</span>-+.]+(;[a-z-]+=[a-z0<span class="number">-9</span>-]+)?)?(;base64)?,([a-z0<span class="number">-9</span>!$&amp;<span class="string">',()*+;=\-._~:@\/?%\s]*?)\s*$/i;</span></span><br></pre></td></tr></table></figure>
+<h2 id="数字-货币金额（支持负数、千分位分隔符）"><a href="#数字-货币金额（支持负数、千分位分隔符）" class="headerlink" title="数字/货币金额（支持负数、千分位分隔符）"></a>数字/货币金额（支持负数、千分位分隔符）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(^[-]?[<span class="number">1</span><span class="number">-9</span>]\d&#123;<span class="number">0</span>,<span class="number">2</span>&#125;($|(,\d&#123;<span class="number">3</span>&#125;)*($|(\.\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;$))))|((^[<span class="number">0</span>](\.\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?)|(^[-][<span class="number">0</span>]\.\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))$/;</span><br></pre></td></tr></table></figure>
+<h2 id="数字-货币金额-只支持正数、不支持校验千分位分隔符"><a href="#数字-货币金额-只支持正数、不支持校验千分位分隔符" class="headerlink" title="数字/货币金额 (只支持正数、不支持校验千分位分隔符)"></a>数字/货币金额 (只支持正数、不支持校验千分位分隔符)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(^[<span class="number">1</span><span class="number">-9</span>]([<span class="number">0</span><span class="number">-9</span>]+)?(\.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$)|(^(<span class="number">0</span>)&#123;<span class="number">1</span>&#125;$)|(^[<span class="number">0</span><span class="number">-9</span>]\.[<span class="number">0</span><span class="number">-9</span>]([<span class="number">0</span><span class="number">-9</span>])?$)/;</span><br></pre></td></tr></table></figure>
+<h2 id="银行卡号（16-或-19-位）"><a href="#银行卡号（16-或-19-位）" class="headerlink" title="银行卡号（16 或 19 位）"></a>银行卡号（16 或 19 位）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^([<span class="number">1</span><span class="number">-9</span>]&#123;<span class="number">1</span>&#125;)(\d&#123;<span class="number">15</span>&#125;|\d&#123;<span class="number">18</span>&#125;)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="中文姓名"><a href="#中文姓名" class="headerlink" title="中文姓名"></a>中文姓名</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^([\u4e00-\u9fa5·]&#123;<span class="number">2</span>,<span class="number">16</span>&#125;)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="英文姓名"><a href="#英文姓名" class="headerlink" title="英文姓名"></a>英文姓名</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(^[a-zA-Z]&#123;<span class="number">1</span>&#125;[a-zA-Z\s]&#123;<span class="number">0</span>,<span class="number">20</span>&#125;[a-zA-Z]&#123;<span class="number">1</span>&#125;$)/;</span><br></pre></td></tr></table></figure>
+<h2 id="新能源车牌号"><a href="#新能源车牌号" class="headerlink" title="新能源车牌号"></a>新能源车牌号</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]&#123;<span class="number">1</span>&#125;[A-HJ-NP-Z]&#123;<span class="number">1</span>&#125;(([<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">5</span>&#125;[DF])|([DF][A-HJ-NP-Z0<span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">4</span>&#125;))$/;</span><br></pre></td></tr></table></figure>
+<h2 id="非新能源车牌号"><a href="#非新能源车牌号" class="headerlink" title="非新能源车牌号"></a>非新能源车牌号</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]&#123;<span class="number">1</span>&#125;[A-HJ-NP-Z]&#123;<span class="number">1</span>&#125;[A-Z0<span class="number">-9</span>]&#123;<span class="number">4</span>&#125;[A-Z0<span class="number">-9</span>挂学警港澳]&#123;<span class="number">1</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="车牌号-新能源-非新能源"><a href="#车牌号-新能源-非新能源" class="headerlink" title="车牌号(新能源+非新能源)"></a>车牌号(新能源+非新能源)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]&#123;<span class="number">1</span>&#125;[A-HJ-NP-Z]&#123;<span class="number">1</span>&#125;(([<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">5</span>&#125;[DF])|([DF]([A-HJ-NP-Z0<span class="number">-9</span>])[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">4</span>&#125;)))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]&#123;<span class="number">1</span>&#125;[A-Z]&#123;<span class="number">1</span>&#125;[A-HJ-NP-Z0<span class="number">-9</span>]&#123;<span class="number">4</span>&#125;[A-HJ-NP-Z0<span class="number">-9</span> 挂学警港澳]&#123;<span class="number">1</span>&#125;)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="URL-链接-网址"><a href="#URL-链接-网址" class="headerlink" title="URL 链接(网址)"></a>URL 链接(网址)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^((https?|ftp|file):\/\/)?([\da-z.-]+)\.([a-z.]&#123;<span class="number">2</span>,<span class="number">6</span>&#125;)(\/\w\.-]*)*\/?<span class="regexp">/;</span></span><br></pre></td></tr></table></figure>
+<h2 id="手机号-严谨-根据工信部-2019-年最新公布的手机号段"><a href="#手机号-严谨-根据工信部-2019-年最新公布的手机号段" class="headerlink" title="手机号(严谨), 根据工信部 2019 年最新公布的手机号段"></a>手机号(严谨), 根据工信部 2019 年最新公布的手机号段</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>((<span class="number">3</span>[\d])|(<span class="number">4</span>[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>])|(<span class="number">5</span>[<span class="number">0</span><span class="number">-3</span>,<span class="number">5</span><span class="number">-9</span>])|(<span class="number">6</span>[<span class="number">5</span><span class="number">-7</span>])|(<span class="number">7</span>[<span class="number">0</span><span class="number">-8</span>])|(<span class="number">8</span>[\d])|(<span class="number">9</span>[<span class="number">1</span>,<span class="number">8</span>,<span class="number">9</span>]))\d&#123;<span class="number">8</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="手机号-宽松-只要是-13-14-15-16-17-18-19-开头即可"><a href="#手机号-宽松-只要是-13-14-15-16-17-18-19-开头即可" class="headerlink" title="手机号(宽松), 只要是 13,14,15,16,17,18,19 开头即可"></a>手机号(宽松), 只要是 13,14,15,16,17,18,19 开头即可</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>[<span class="number">3</span><span class="number">-9</span>]\d&#123;<span class="number">9</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="手机号-最宽松-只要是-1-开头即可-如果你的手机号是用来接收短信-优先建议选择这一条"><a href="#手机号-最宽松-只要是-1-开头即可-如果你的手机号是用来接收短信-优先建议选择这一条" class="headerlink" title="手机号(最宽松), 只要是 1 开头即可, 如果你的手机号是用来接收短信, 优先建议选择这一条"></a>手机号(最宽松), 只要是 1 开头即可, 如果你的手机号是用来接收短信, 优先建议选择这一条</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>\d&#123;<span class="number">10</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="日期-如-2000-01-01-或-2000-1-1"><a href="#日期-如-2000-01-01-或-2000-1-1" class="headerlink" title="日期, 如: 2000-01-01 或 2000-1-1"></a>日期, 如: 2000-01-01 或 2000-1-1</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">4</span>&#125;(-)([<span class="number">0</span><span class="number">-1</span>][<span class="number">0</span><span class="number">-2</span>]|\d)\<span class="number">1</span>([<span class="number">0</span><span class="number">-2</span>]\d|\d|<span class="number">30</span>|<span class="number">31</span>)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="email-地址"><a href="#email-地址" class="headerlink" title="email 地址"></a>email 地址</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z0-9.!#$%&amp;'*+\/=?^_`&#123;|&#125;~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]&#123;0,61&#125;[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]&#123;0,61&#125;[a-zA-Z0-9])?)*$/;</span><br></pre></td></tr></table></figure>
+<h2 id="国内座机电话-如-0341-86091234"><a href="#国内座机电话-如-0341-86091234" class="headerlink" title="国内座机电话,如: 0341-86091234"></a>国内座机电话,如: 0341-86091234</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\d&#123;<span class="number">3</span>&#125;-\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">7</span>&#125;/;</span><br></pre></td></tr></table></figure>
+<h2 id="一代身份证号-15-位数字"><a href="#一代身份证号-15-位数字" class="headerlink" title="一代身份证号(15 位数字)"></a>一代身份证号(15 位数字)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">8</span>&#125;(<span class="number">0</span>\d|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)([<span class="number">0</span><span class="number">-2</span>]\d|<span class="number">30</span>|<span class="number">31</span>)\d&#123;<span class="number">3</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="二代身份证号-18-位数字-最后一位是校验位-可能为数字或字符-X"><a href="#二代身份证号-18-位数字-最后一位是校验位-可能为数字或字符-X" class="headerlink" title="二代身份证号(18 位数字),最后一位是校验位,可能为数字或字符 X"></a>二代身份证号(18 位数字),最后一位是校验位,可能为数字或字符 X</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">6</span>&#125;(<span class="number">18</span>|<span class="number">19</span>|<span class="number">20</span>)\d&#123;<span class="number">2</span>&#125;(<span class="number">0</span>\d|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)([<span class="number">0</span><span class="number">-2</span>]\d|<span class="number">30</span>|<span class="number">31</span>)\d&#123;<span class="number">3</span>&#125;(\d|X|x)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="身份证号-支持-1-2-代-15-位-18-位数字"><a href="#身份证号-支持-1-2-代-15-位-18-位数字" class="headerlink" title="身份证号, 支持 1/2 代(15 位/18 位数字)"></a>身份证号, 支持 1/2 代(15 位/18 位数字)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(^\d&#123;<span class="number">8</span>&#125;(<span class="number">0</span>\d|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)([<span class="number">0</span><span class="number">-2</span>]\d|<span class="number">30</span>|<span class="number">31</span>)\d&#123;<span class="number">3</span>&#125;$)|(^\d&#123;<span class="number">6</span>&#125;(<span class="number">18</span>|<span class="number">19</span>|<span class="number">20</span>)\d&#123;<span class="number">2</span>&#125;(<span class="number">0</span>\d|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)([<span class="number">0</span><span class="number">-2</span>]\d|<span class="number">30</span>|<span class="number">31</span>)\d&#123;<span class="number">3</span>&#125;(\d|X|x)$)/;</span><br></pre></td></tr></table></figure>
+<h2 id="护照（包含香港、澳门）"><a href="#护照（包含香港、澳门）" class="headerlink" title="护照（包含香港、澳门）"></a>护照（包含香港、澳门）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(^[EeKkGgDdSsPpHh]\d&#123;<span class="number">8</span>&#125;$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(<span class="number">1</span>[<span class="number">45</span>]))\d&#123;<span class="number">7</span>&#125;$)/;</span><br></pre></td></tr></table></figure>
+<h2 id="帐号是否合法-字母开头，允许-5-16-字节，允许字母数字下划线组合"><a href="#帐号是否合法-字母开头，允许-5-16-字节，允许字母数字下划线组合" class="headerlink" title="帐号是否合法(字母开头，允许 5-16 字节，允许字母数字下划线组合"></a>帐号是否合法(字母开头，允许 5-16 字节，允许字母数字下划线组合</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z][a-zA-Z0<span class="number">-9</span>_]&#123;<span class="number">4</span>,<span class="number">15</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="纯中文-汉字"><a href="#纯中文-汉字" class="headerlink" title="纯中文/汉字"></a>纯中文/汉字</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[\u4E00-\u9FA5]+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="是否小数"><a href="#是否小数" class="headerlink" title="是否小数"></a>是否小数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d+\.\d+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="电话-座机"><a href="#电话-座机" class="headerlink" title="电话(座机)"></a>电话(座机)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">0</span>\d&#123;<span class="number">2</span>,<span class="number">3</span>&#125;-\d&#123;<span class="number">7</span>,<span class="number">8</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="纯数字"><a href="#纯数字" class="headerlink" title="纯数字"></a>纯数字</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">1</span>,&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="是否-html-标签"><a href="#是否-html-标签" class="headerlink" title="是否 html 标签"></a>是否 html 标签</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;/;</span><br></pre></td></tr></table></figure>
+<h2 id="是否-qq-号格式正确"><a href="#是否-qq-号格式正确" class="headerlink" title="是否 qq 号格式正确"></a>是否 qq 号格式正确</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">4</span>,<span class="number">10</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="是否由数字和字母组成"><a href="#是否由数字和字母组成" class="headerlink" title="是否由数字和字母组成"></a>是否由数字和字母组成</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[A-Za-z0<span class="number">-9</span>]+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="纯英文字母"><a href="#纯英文字母" class="headerlink" title="纯英文字母"></a>纯英文字母</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z]+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="纯小写英文字母组成"><a href="#纯小写英文字母组成" class="headerlink" title="纯小写英文字母组成"></a>纯小写英文字母组成</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-z]+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="纯大写英文字母"><a href="#纯大写英文字母" class="headerlink" title="纯大写英文字母"></a>纯大写英文字母</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[A-Z]+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="密码强度正则，最少-6-位，包括至少-1-个大写字母，1-个小写字母，1-个数字，1-个特殊字符"><a href="#密码强度正则，最少-6-位，包括至少-1-个大写字母，1-个小写字母，1-个数字，1-个特殊字符" class="headerlink" title="密码强度正则，最少 6 位，包括至少 1 个大写字母，1 个小写字母，1 个数字，1 个特殊字符"></a>密码强度正则，最少 6 位，包括至少 1 个大写字母，1 个小写字母，1 个数字，1 个特殊字符</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&amp;*? ]).*$/;</span><br></pre></td></tr></table></figure>
+<h2 id="用户名正则，4-到-16-位（字母，数字，下划线，减号）"><a href="#用户名正则，4-到-16-位（字母，数字，下划线，减号）" class="headerlink" title="用户名正则，4 到 16 位（字母，数字，下划线，减号）"></a>用户名正则，4 到 16 位（字母，数字，下划线，减号）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z0<span class="number">-9</span>_-]&#123;<span class="number">4</span>,<span class="number">16</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="ip-v4"><a href="#ip-v4" class="headerlink" title="ip-v4"></a>ip-v4</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?:(?:<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>]|<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>][<span class="number">0</span><span class="number">-9</span>]|[<span class="number">01</span>]?[<span class="number">0</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]?)\.)&#123;<span class="number">3</span>&#125;(?:<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>]|<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>][<span class="number">0</span><span class="number">-9</span>]|[<span class="number">01</span>]?[<span class="number">0</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]?)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="ip-v6"><a href="#ip-v6" class="headerlink" title="ip-v6"></a>ip-v6</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^((([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">7</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">6</span>&#125;:[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">5</span>&#125;:([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)?[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">4</span>&#125;:([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">2</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">3</span>&#125;:([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">3</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">2</span>&#125;:([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">4</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">6</span>&#125;((\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b)\.)&#123;<span class="number">3</span>&#125;(\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b))|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">5</span>&#125;:((\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b)\.)&#123;<span class="number">3</span>&#125;(\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b))|(::([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">5</span>&#125;((\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b)\.)&#123;<span class="number">3</span>&#125;(\b((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;))\b))|([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;::([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">5</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(::([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">0</span>,<span class="number">6</span>&#125;[<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;)|(([<span class="number">0</span><span class="number">-9</span>A-Fa-f]&#123;<span class="number">1</span>,<span class="number">4</span>&#125;:)&#123;<span class="number">1</span>,<span class="number">7</span>&#125;:))$/i;</span><br></pre></td></tr></table></figure>
+<h2 id="16-进制颜色"><a href="#16-进制颜色" class="headerlink" title="16 进制颜色"></a>16 进制颜色</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^#?([a-fA-F0-9]&#123;6&#125;|[a-fA-F0-9]&#123;3&#125;)$/;</span><br></pre></td></tr></table></figure>
+<h2 id="微信号，6-至-20-位，以字母开头，字母，数字，减号，下划线"><a href="#微信号，6-至-20-位，以字母开头，字母，数字，减号，下划线" class="headerlink" title="微信号，6 至 20 位，以字母开头，字母，数字，减号，下划线"></a>微信号，6 至 20 位，以字母开头，字母，数字，减号，下划线</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z][-_a-zA-Z0<span class="number">-9</span>]&#123;<span class="number">5</span>,<span class="number">19</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="中国邮政编码"><a href="#中国邮政编码" class="headerlink" title="中国邮政编码"></a>中国邮政编码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(<span class="number">0</span>[<span class="number">1</span><span class="number">-7</span>]|<span class="number">1</span>[<span class="number">0</span><span class="number">-356</span>]|<span class="number">2</span>[<span class="number">0</span><span class="number">-7</span>]|<span class="number">3</span>[<span class="number">0</span><span class="number">-6</span>]|<span class="number">4</span>[<span class="number">0</span><span class="number">-7</span>]|<span class="number">5</span>[<span class="number">1</span><span class="number">-7</span>]|<span class="number">6</span>[<span class="number">1</span><span class="number">-7</span>]|<span class="number">7</span>[<span class="number">0</span><span class="number">-5</span>]|<span class="number">8</span>[<span class="number">013</span><span class="number">-6</span>])\d&#123;<span class="number">4</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="只包含中文和数字"><a href="#只包含中文和数字" class="headerlink" title="只包含中文和数字"></a>只包含中文和数字</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(([\u4E00-\u9FA5])|(\d))+$/;</span><br></pre></td></tr></table></figure>
+<h2 id="非字母"><a href="#非字母" class="headerlink" title="非字母"></a>非字母</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[^A-Za-z]$/;</span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2019/07/12/正则/">https://www.mizuka.top/2019/07/12/正则/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2019/07/12/正则/">July 12th 2019, 6:17:35 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/07/12/RN2Flutter/" title=  >
+                    <div class="prevTitle">[Untitled Post]</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "0eAmMMUxqe9alLwt4KzftCnv-gzGzoHsz",
+        appKey: "PfYhgvohzSQStMaJHaneYXq9",
+        placeholder: "给我个留言吧！",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:mizuka.wu@outlook.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mizuka-wu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/1383044/" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 谷歌广告 -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-7475107856528468",
+    enable_page_level_ads: true
+  });
+</script>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#正则大全"><span class="toc-number">1.</span> <span class="toc-text">正则大全   </span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#html-注释"><span class="toc-number">1.1.</span> <span class="toc-text">html 注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#md5-格式-32-位"><span class="toc-number">1.2.</span> <span class="toc-text">md5 格式(32 位)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版本号格式必须为-X-Y-Z"><span class="toc-number">1.3.</span> <span class="toc-text">版本号格式必须为 X.Y.Z</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#视频链接地址（视频格式可按需增删）"><span class="toc-number">1.4.</span> <span class="toc-text">视频链接地址（视频格式可按需增删）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片链接地址（图片格式可按需增删）"><span class="toc-number">1.5.</span> <span class="toc-text">图片链接地址（图片格式可按需增删）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-小时制时间（HH-mm-ss）"><span class="toc-number">1.6.</span> <span class="toc-text">24 小时制时间（HH:mm:ss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-小时制时间（hh-mm-ss）"><span class="toc-number">1.7.</span> <span class="toc-text">12 小时制时间（hh:mm:ss）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64-格式"><span class="toc-number">1.8.</span> <span class="toc-text">base64 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数字-货币金额（支持负数、千分位分隔符）"><span class="toc-number">1.9.</span> <span class="toc-text">数字/货币金额（支持负数、千分位分隔符）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数字-货币金额-只支持正数、不支持校验千分位分隔符"><span class="toc-number">1.10.</span> <span class="toc-text">数字/货币金额 (只支持正数、不支持校验千分位分隔符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#银行卡号（16-或-19-位）"><span class="toc-number">1.11.</span> <span class="toc-text">银行卡号（16 或 19 位）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中文姓名"><span class="toc-number">1.12.</span> <span class="toc-text">中文姓名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#英文姓名"><span class="toc-number">1.13.</span> <span class="toc-text">英文姓名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新能源车牌号"><span class="toc-number">1.14.</span> <span class="toc-text">新能源车牌号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非新能源车牌号"><span class="toc-number">1.15.</span> <span class="toc-text">非新能源车牌号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#车牌号-新能源-非新能源"><span class="toc-number">1.16.</span> <span class="toc-text">车牌号(新能源+非新能源)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-链接-网址"><span class="toc-number">1.17.</span> <span class="toc-text">URL 链接(网址)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手机号-严谨-根据工信部-2019-年最新公布的手机号段"><span class="toc-number">1.18.</span> <span class="toc-text">手机号(严谨), 根据工信部 2019 年最新公布的手机号段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手机号-宽松-只要是-13-14-15-16-17-18-19-开头即可"><span class="toc-number">1.19.</span> <span class="toc-text">手机号(宽松), 只要是 13,14,15,16,17,18,19 开头即可</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手机号-最宽松-只要是-1-开头即可-如果你的手机号是用来接收短信-优先建议选择这一条"><span class="toc-number">1.20.</span> <span class="toc-text">手机号(最宽松), 只要是 1 开头即可, 如果你的手机号是用来接收短信, 优先建议选择这一条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期-如-2000-01-01-或-2000-1-1"><span class="toc-number">1.21.</span> <span class="toc-text">日期, 如: 2000-01-01 或 2000-1-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#email-地址"><span class="toc-number">1.22.</span> <span class="toc-text">email 地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#国内座机电话-如-0341-86091234"><span class="toc-number">1.23.</span> <span class="toc-text">国内座机电话,如: 0341-86091234</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一代身份证号-15-位数字"><span class="toc-number">1.24.</span> <span class="toc-text">一代身份证号(15 位数字)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二代身份证号-18-位数字-最后一位是校验位-可能为数字或字符-X"><span class="toc-number">1.25.</span> <span class="toc-text">二代身份证号(18 位数字),最后一位是校验位,可能为数字或字符 X</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#身份证号-支持-1-2-代-15-位-18-位数字"><span class="toc-number">1.26.</span> <span class="toc-text">身份证号, 支持 1/2 代(15 位/18 位数字)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#护照（包含香港、澳门）"><span class="toc-number">1.27.</span> <span class="toc-text">护照（包含香港、澳门）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#帐号是否合法-字母开头，允许-5-16-字节，允许字母数字下划线组合"><span class="toc-number">1.28.</span> <span class="toc-text">帐号是否合法(字母开头，允许 5-16 字节，允许字母数字下划线组合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯中文-汉字"><span class="toc-number">1.29.</span> <span class="toc-text">纯中文/汉字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#是否小数"><span class="toc-number">1.30.</span> <span class="toc-text">是否小数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电话-座机"><span class="toc-number">1.31.</span> <span class="toc-text">电话(座机)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯数字"><span class="toc-number">1.32.</span> <span class="toc-text">纯数字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#是否-html-标签"><span class="toc-number">1.33.</span> <span class="toc-text">是否 html 标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#是否-qq-号格式正确"><span class="toc-number">1.34.</span> <span class="toc-text">是否 qq 号格式正确</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#是否由数字和字母组成"><span class="toc-number">1.35.</span> <span class="toc-text">是否由数字和字母组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯英文字母"><span class="toc-number">1.36.</span> <span class="toc-text">纯英文字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯小写英文字母组成"><span class="toc-number">1.37.</span> <span class="toc-text">纯小写英文字母组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯大写英文字母"><span class="toc-number">1.38.</span> <span class="toc-text">纯大写英文字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密码强度正则，最少-6-位，包括至少-1-个大写字母，1-个小写字母，1-个数字，1-个特殊字符"><span class="toc-number">1.39.</span> <span class="toc-text">密码强度正则，最少 6 位，包括至少 1 个大写字母，1 个小写字母，1 个数字，1 个特殊字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户名正则，4-到-16-位（字母，数字，下划线，减号）"><span class="toc-number">1.40.</span> <span class="toc-text">用户名正则，4 到 16 位（字母，数字，下划线，减号）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip-v4"><span class="toc-number">1.41.</span> <span class="toc-text">ip-v4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip-v6"><span class="toc-number">1.42.</span> <span class="toc-text">ip-v6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-进制颜色"><span class="toc-number">1.43.</span> <span class="toc-text">16 进制颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信号，6-至-20-位，以字母开头，字母，数字，减号，下划线"><span class="toc-number">1.44.</span> <span class="toc-text">微信号，6 至 20 位，以字母开头，字母，数字，减号，下划线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中国邮政编码"><span class="toc-number">1.45.</span> <span class="toc-text">中国邮政编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只包含中文和数字"><span class="toc-number">1.46.</span> <span class="toc-text">只包含中文和数字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非字母"><span class="toc-number">1.47.</span> <span class="toc-text">非字母</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 25
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/2019/07/12/正则/" >常用正则</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/2019/07/12/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/2019/07/12/RN2Flutter/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/上传app卡在通过App store进行鉴定/" >上传app卡在通过app store进行鉴定</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/Android如何直接投屏到电脑/" >Android如何直接投屏到电脑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/15</span><a class="archive-post-title" href= "/2019/06/15/一次node内存泄漏调查/" >一次node内存泄漏的调查</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/10</span><a class="archive-post-title" href= "/2019/06/10/一次node内存泄漏排查和解决/" >一次node内存泄漏排查和解决</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2019/06/05/如何删除除了Master之外的所有分支/" >如何删除除了Master之外的所有分支</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2019/04/10/有关前端和pdf相关的几件事/" >有关前端和pdf相关的几件事</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2019/03/29/axios如何中断请求/" >axios如何中断请求</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2019/02/11/Mac前端上手指南/" >Mac前端上手指南</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2019/01/03/我们是怎么从ng迁移到vue的/" >我们是怎么从ng迁移到vue的</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2018/12/15/RTAC86U刷机指南/" >RTAC86U刷机指南</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2018/12/04/android导致文字偏上的问题/" >android导致文字偏上的问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2018/11/18/电视直播源分享/" >电视直播源分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/2018/11/13/小微企业验证码破解/" >小微企业验证码破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2018/11/09/vscode插件分享/" >vscode插件分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/学js很简单，就是有点头冷1/" >学js很简单，就是有点头冷（1从工程化开始）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷0/" >学js很简单，就是有点头冷（0，大概是绪论）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/情侣日常1/" >情侣日常1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2018/10/18/从js数组重查找出重复元素的方法/" >从js数组重查找出重复元素的方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/教你如何构建Mojave动态壁纸/" >教你如何构建Mojave动态壁纸</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/15</span><a class="archive-post-title" href= "/2018/10/15/记不住快捷键怎么办/" >记不住快捷键怎么办</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="可以公开的情报"><span class="iconfont-archer">&#xe606;</span>可以公开的情报</span>
+    
+        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="android"><span class="iconfont-archer">&#xe606;</span>android</span>
+    
+        <span class="sidebar-tag-name" data-tags="上手指南"><span class="iconfont-archer">&#xe606;</span>上手指南</span>
+    
+        <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
+    
+        <span class="sidebar-tag-name" data-tags="经验"><span class="iconfont-archer">&#xe606;</span>经验</span>
+    
+        <span class="sidebar-tag-name" data-tags="line-height"><span class="iconfont-archer">&#xe606;</span>line-height</span>
+    
+        <span class="sidebar-tag-name" data-tags="font-size"><span class="iconfont-archer">&#xe606;</span>font-size</span>
+    
+        <span class="sidebar-tag-name" data-tags="RTAC86U"><span class="iconfont-archer">&#xe606;</span>RTAC86U</span>
+    
+        <span class="sidebar-tag-name" data-tags="乳酸菌"><span class="iconfont-archer">&#xe606;</span>乳酸菌</span>
+    
+        <span class="sidebar-tag-name" data-tags="gfw"><span class="iconfont-archer">&#xe606;</span>gfw</span>
+    
+        <span class="sidebar-tag-name" data-tags="插件"><span class="iconfont-archer">&#xe606;</span>插件</span>
+    
+        <span class="sidebar-tag-name" data-tags="笔记"><span class="iconfont-archer">&#xe606;</span>笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="学习"><span class="iconfont-archer">&#xe606;</span>学习</span>
+    
+        <span class="sidebar-tag-name" data-tags="记录"><span class="iconfont-archer">&#xe606;</span>记录</span>
+    
+        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
+    
+        <span class="sidebar-tag-name" data-tags="ios"><span class="iconfont-archer">&#xe606;</span>ios</span>
+    
+        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
+    
+        <span class="sidebar-tag-name" data-tags="ecmascript"><span class="iconfont-archer">&#xe606;</span>ecmascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="数组"><span class="iconfont-archer">&#xe606;</span>数组</span>
+    
+        <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
+    
+        <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
+    
+        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="日常"><span class="iconfont-archer">&#xe606;</span>日常</span>
+    
+        <span class="sidebar-tag-name" data-tags="祉华"><span class="iconfont-archer">&#xe606;</span>祉华</span>
+    
+        <span class="sidebar-tag-name" data-tags="OSX"><span class="iconfont-archer">&#xe606;</span>OSX</span>
+    
+        <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
+    
+        <span class="sidebar-tag-name" data-tags="pdf"><span class="iconfont-archer">&#xe606;</span>pdf</span>
+    
+        <span class="sidebar-tag-name" data-tags="软件推荐"><span class="iconfont-archer">&#xe606;</span>软件推荐</span>
+    
+        <span class="sidebar-tag-name" data-tags="镜音"><span class="iconfont-archer">&#xe606;</span>镜音</span>
+    
+        <span class="sidebar-tag-name" data-tags="cos"><span class="iconfont-archer">&#xe606;</span>cos</span>
+    
+        <span class="sidebar-tag-name" data-tags="镜音len"><span class="iconfont-archer">&#xe606;</span>镜音len</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="ng"><span class="iconfont-archer">&#xe606;</span>ng</span>
+    
+        <span class="sidebar-tag-name" data-tags="迁移"><span class="iconfont-archer">&#xe606;</span>迁移</span>
+    
+        <span class="sidebar-tag-name" data-tags="angularJs"><span class="iconfont-archer">&#xe606;</span>angularJs</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="可以公开的情报"><span class="iconfont-archer">&#xe60a;</span>可以公开的情报</span>
+    
+        <span class="sidebar-category-name" data-categories="开发的捷径"><span class="iconfont-archer">&#xe60a;</span>开发的捷径</span>
+    
+        <span class="sidebar-category-name" data-categories="学习笔记"><span class="iconfont-archer">&#xe60a;</span>学习笔记</span>
+    
+        <span class="sidebar-category-name" data-categories="祉华"><span class="iconfont-archer">&#xe60a;</span>祉华</span>
+    
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
+    
+        <span class="sidebar-category-name" data-categories="Cos"><span class="iconfont-archer">&#xe60a;</span>Cos</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mizuka"
+    }
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
