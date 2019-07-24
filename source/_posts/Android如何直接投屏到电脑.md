@@ -9,6 +9,7 @@ date: 2019-07-09 18:17:35
 categories:
 ---
 
-# 安装scycpy
-```brew install scycpy```
+# 安装 scrcpy
+
+`brew install scrcpy`
 连接上安卓手机之后就行
