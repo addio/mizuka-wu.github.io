@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+   
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  />
+  <meta name="author" content="Mizuka" />
+  <meta name="renderer" content="webkit" />
+  <meta name="copyright" content="Mizuka" />
+  <meta name="keywords" content="水华的博客 | Mizuka" />
+  <meta name="description" content="水华的博客，coser和前端记录" />
+  <meta name="Cache-Control" content="no-cache" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>postgresql全文搜索引擎 · 水华的博客</title>
+  <link rel="manifest" href="/manifest.json" />
+  <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+ <link rel="preload" href= /css/style.css?v=20180709 as="style"
+  onload="this.onload=null;this.rel='stylesheet'" /> <link rel="stylesheet"
+  href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+  
+  <link
+    rel="preload"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+   <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js"
+    as="script"
+  />
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+    as="script"
+  />
+  <link rel="preload" href="/scripts/main.js" as="script" />
+  <link
+    rel="preload"
+    as="font"
+    href="/font/Oswald-Regular.ttf"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    as="font"
+    href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff"
+    crossorigin
+  />
+
+  
+  <!-- algolia -->
+  <script>
+    
+    var hits = JSON.parse('{"per_page":10}')
+    var labels = JSON.parse('{"input_placeholder":"搜索模式，启动！","hits_empty":"什么都没找到呢～","hits_stats":"搜索到了${hits}条结果！ （${time} ms）"}')
+
+    var algolia = {
+        applicationID: '30Y4O0O0A2',
+        apiKey: '16bdbd3e031ecae9ae00c3626d819d64',
+        indexName: 'Blog',
+        hits: hits,
+        labels: labels
+    }
+  </script>
+  
+  <!-- fancybox -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"
+    defer
+  ></script>
+  <!-- 百度统计  -->
+  
+  <!-- 谷歌统计  -->
+  
+  <script>
+    ;(function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r
+      ;(i[r] =
+        i[r] ||
+        function() {
+          ;(i[r].q = i[r].q || []).push(arguments)
+        }),
+        (i[r].l = 1 * new Date())
+      ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+      a.async = 1
+      a.src = g
+      m.parentNode.insertBefore(a, m)
+    })(
+      window,
+      document,
+      'script',
+      'https://www.google-analytics.com/analytics.js',
+      'ga'
+    )
+    ga('create', 'UA-112738831-1', 'auto')
+    ga('send', 'pageview')
+  </script>
+  
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >水华的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">postgresql全文搜索引擎</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>水华的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            postgresql全文搜索引擎
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库">数据库</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "搜索引擎">搜索引擎</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "postgresql">postgresql</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1.8k</span> / Reading time: <span class="post-count">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/10/18</span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="带权重的搜索引擎"><a href="#带权重的搜索引擎" class="headerlink" title="带权重的搜索引擎"></a>带权重的搜索引擎</h1><blockquote>
+<p><a href="https://github.com/digoal/blog/blob/462c0cf738380b0bfc080e99fd168c19bb2d4fce/201611/20161115_01.md" target="_blank" rel="noopener">双十一背后的技术</a> 参考此文 对其进行改进和自定义<br>毫秒级的为<a href="https://yq.aliyun.com/articles/68424?spm=a2c4e.11153959.blogcont61833.34.uwRpsS" target="_blank" rel="noopener">该文章</a></p>
+</blockquote>
+<h2 id="具体实施流程"><a href="#具体实施流程" class="headerlink" title="具体实施流程"></a>具体实施流程</h2><h3 id="分词-英文基本无需分词"><a href="#分词-英文基本无需分词" class="headerlink" title="分词(英文基本无需分词)"></a>分词(英文基本无需分词)</h3><h4 id="zhparser"><a href="#zhparser" class="headerlink" title="zhparser"></a><a href="https://github.com/amutu/zhparser" target="_blank" rel="noopener">zhparser</a></h4><p>安装 SCWS.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2 | tar xf -</span><br><span class="line"></span><br><span class="line"> cd scws-1.2.3 ; ./configure ; make install</span><br><span class="line"></span><br><span class="line">注意:在FreeBSD release 10及以上版本上运行configure时，需要增加--with-pic选项。</span><br><span class="line"></span><br><span class="line">如果是从github上下载的scws源码需要先运行以下命令生成configure文件：</span><br><span class="line"></span><br><span class="line"> touch README;aclocal;autoconf;autoheader;libtoolize;automake --add-missing</span><br><span class="line"></span><br><span class="line">  git clone https://github.com/amutu/zhparser.git</span><br><span class="line">  cd zhparser</span><br><span class="line">  make &amp;&amp; make install</span><br><span class="line">  CREATE EXTENSION zhparser;</span><br><span class="line">  CREATE TEXT SEARCH CONFIGURATION zhcfg (PARSER = zhparser);</span><br><span class="line">  ALTER TEXT SEARCH CONFIGURATION zhcfg ADD MAPPING FOR n,v,a,i,e,l,j,m WITH simple;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">增加类型</span><br><span class="line">select ts_debug(&apos;zhcfg&apos;,&apos;三一&apos;) ;</span><br><span class="line">                ts_debug</span><br><span class="line">可以查看到分词的token类型 如果不在之前的mapping内的话是不会被分词的</span><br><span class="line">解决方案是</span><br><span class="line">ALTER TEXT SEARCH CONFIGURATION zhcfg ADD MAPPING FOR [没有的类型] WITH simple;</span><br></pre></td></tr></table></figure>
+<p><strong>设置分词参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- 忽略所有的标点等特殊符号</span><br><span class="line">set zhparser.punctuation_ignore = on;</span><br><span class="line">-- 全部单字复合</span><br><span class="line">set zhparser.multi_zall = on;</span><br><span class="line">-- 散字二元复合</span><br><span class="line">set zhparser.multi_duality = on;</span><br><span class="line">-- 闲散文字自动以二字分词法聚合</span><br><span class="line">set zhparser.seg_with_duality = on;</span><br><span class="line">-- 短词复合</span><br><span class="line">set zhparser.multi_short = on;</span><br><span class="line">-- 重要单字复合</span><br><span class="line">set zhparser.multi_zmain = on;</span><br></pre></td></tr></table></figure>
+<p><strong>测试</strong></p>
+<p><code>select to_tsvector(&#39;zhcfg&#39;,&#39;南京市长江大桥&#39;);测试用例</code></p>
+<p><strong>中文单字等特殊需求</strong><a href="https://github.com/digoal/blog/blob/master/201711/20171104_03.md" target="_blank" rel="noopener">PostgreSQL 中英文混合分词特殊规则(中文单字、英文单词) - 中英分明</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create or replace function udf_to_tsvector(regconfig,text) returns tsvector as $$</span><br><span class="line">  SELECT array_to_tsvector(array_agg(token)) from ts_debug($1, $2)</span><br><span class="line">    where (char_length(token)=1 and octet_length(token)&lt;&gt;1 ) or (char_length(token)=octet_length(token));</span><br><span class="line">$$ language sql strict immutable;</span><br></pre></td></tr></table></figure>
+<h3 id="按照字段进行搜索"><a href="#按照字段进行搜索" class="headerlink" title="按照字段进行搜索"></a>按照字段进行搜索</h3><p><strong>用例</strong><br><code>select * from search_company where to_tsvector(company_name_cn) @@ to_tsquery(&#39;zhcfg&#39;, &#39;上海&#39;);</code></p>
+<p><strong>转化为行级(全字段)的方式，to_tsvector 传入的对象为转为 text 的该行</strong><br><code>select * from search_company where to_tsvector(search_company::text) @@ to_tsquery(&#39;zhcfg&#39;, &#39;上海&#39;);</code></p>
+<h3 id="搜索用的固态视图"><a href="#搜索用的固态视图" class="headerlink" title="搜索用的固态视图"></a>搜索用的固态视图</h3><blockquote>
+<p>通过固态视图事先对可以可以搜索的部分进行预处理 加速</p>
+</blockquote>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ol>
+<li>增加 ts 列 减少在搜索的时候动态创建的成本</li>
+<li>利用 ts 列 可以进行<strong>行级搜索</strong></li>
+<li>COALESCE 函数防止 null</li>
+<li>顺带一提行的 ts 列可以参考<a href="https://github.com/digoal/blog/blob/8946988f885a3f16f159082610d6ec9027ae21dd/201604/20160419_01.md" target="_blank" rel="noopener">该文章</a> 但是自定义权重就不行，使用手动构建</li>
+<li>附带一个 weight 的作为行的权重，上市为:2 非上市为 1 投资机构为 0</li>
+<li>weight 的 COALESCE 函数可以附带作为未来公司自带权重的时候的扩展</li>
+<li>setweight 函数的例子是设定字段的权重，字段内所有的关键字的权重将被统一设置 有 ABCD 之分 可以用来过滤分词 ts_filter 或者权重计算匹配度</li>
+<li>text 字段 这样模糊搜索可以加快一定速度了</li>
+<li><a href="https://yq.aliyun.com/articles/7730" target="_blank" rel="noopener">zpharse 配置</a></li>
+<li>配置可以拼音搜索<a href="http://www.codeweblog.com/postgresql%E7%9A%84%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/" target="_blank" rel="noopener">参考</a></li>
+<li>建立索引<code>create index idx_test_ts on search_company using gin (ts);</code></li>
+<li>另一个转 pinyin 的方案<a href="https://yq.aliyun.com/articles/228252" target="_blank" rel="noopener">汉字转拼音</a> 已注入 有修改</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    result.company_id,</span><br><span class="line">    result.company_logo,</span><br><span class="line">    result.ticker,</span><br><span class="line">    result.company_status_id,</span><br><span class="line">    result.company_name_cn,</span><br><span class="line">    result.company_name_en,</span><br><span class="line">    result.company_shortname_cn,</span><br><span class="line">    result.company_shortname_en,</span><br><span class="line">    result.brand_name,</span><br><span class="line">    result.year_founded,</span><br><span class="line">    result.company_status_name_cn,</span><br><span class="line">    result.company_status_name_en,</span><br><span class="line">    result.weight,</span><br><span class="line">    -- 添加支持拼音 不需要的话 直接用ts</span><br><span class="line">    ((get_pinyin((result.ts)::text))::tsvector || (get_pinyin((result.ts)::text, &apos;zm&apos;::text))::tsvector || result.ts) AS ts</span><br><span class="line"> FROM (</span><br><span class="line"> SELECT computed_list.company_id,</span><br><span class="line">    computed_list.company_logo,</span><br><span class="line">    computed_list.ticker,</span><br><span class="line">    computed_list.company_status_id,</span><br><span class="line">    computed_list.company_name_cn,</span><br><span class="line">    computed_list.company_name_en,</span><br><span class="line">    computed_list.company_shortname_cn,</span><br><span class="line">    computed_list.company_shortname_en,</span><br><span class="line">    computed_list.brand_name,</span><br><span class="line">    computed_list.year_founded,</span><br><span class="line">    computed_list.company_status_name_cn,</span><br><span class="line">    computed_list.company_status_name_en,</span><br><span class="line">    -- 添加权重 将company_status_id转为权重 第一个null可以改为联查作为第三方权重</span><br><span class="line">    COALESCE(NULL::integer,</span><br><span class="line">        CASE</span><br><span class="line">            WHEN ((computed_list.company_status_id)::text ~~ &apos;1%&apos;::text) THEN 2</span><br><span class="line">            WHEN ((computed_list.company_status_id)::text ~~ &apos;2%&apos;::text) THEN 1</span><br><span class="line">            ELSE 0</span><br><span class="line">        END) AS weight,</span><br><span class="line">    -- 字段权重 有一部分比如company_shortname_cn用全部作为关键词</span><br><span class="line">    COALESCE(setweight(((computed_list.company_id) || &apos;:1 &apos;)::tsvector, &apos;A&apos;::&quot;char&quot;),&apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(to_tsvector(&apos;zhcfg&apos;,computed_list.company_name_cn), &apos;A&apos;), &apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(to_tsvector(computed_list.company_name_en), &apos;A&apos;), &apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(to_tsvector(&apos;zhcfg&apos;,computed_list.company_shortname_cn), &apos;A&apos;), &apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(to_tsvector(&apos;zhcfg&apos;,computed_list.company_shortname_en), &apos;A&apos;), &apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(((computed_list.company_shortname_cn) || &apos;:1 &apos;)::tsvector, &apos;A&apos;::&quot;char&quot;),&apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(((computed_list.company_status_name_en) || &apos;:1 &apos;)::tsvector, &apos;A&apos;::&quot;char&quot;),&apos;&apos;) ||</span><br><span class="line">    COALESCE(setweight(((computed_list.brand_name) || &apos;:1 &apos;)::tsvector, &apos;A&apos;::&quot;char&quot;),&apos;&apos;)</span><br><span class="line">	as ts</span><br><span class="line">	-- 合并掉该合并的部分比如brand name</span><br><span class="line">   FROM ( SELECT list.company_id,</span><br><span class="line">            list.company_logo,</span><br><span class="line">            list.ticker,</span><br><span class="line">            list.company_status_id,</span><br><span class="line">            list.company_name_cn,</span><br><span class="line">            list.company_name_en,</span><br><span class="line">            list.company_shortname_cn,</span><br><span class="line">            list.company_shortname_en,</span><br><span class="line">            -- 合并brand_name</span><br><span class="line">            array_to_string(array_agg(list.brand_name), &apos;,&apos;::text) AS brand_name,</span><br><span class="line">            list.year_founded,</span><br><span class="line">            list.company_status_name_cn,</span><br><span class="line">            list.company_status_name_en</span><br><span class="line">            -- 先整理原始的数据</span><br><span class="line">           FROM ( SELECT DISTINCT a.company_id,</span><br><span class="line">           			a.company_logo,</span><br><span class="line">                    a.ticker,</span><br><span class="line">                    a.company_status_id,</span><br><span class="line">                    a.company_name_cn,</span><br><span class="line">                    a.company_name_en,</span><br><span class="line">                    a.company_shortname_cn,</span><br><span class="line">                    a.company_shortname_en,</span><br><span class="line">                    b.brand_name,</span><br><span class="line">                    a.year_founded,</span><br><span class="line">                    c.name_cn AS company_status_name_cn,</span><br><span class="line">                    c.name_en AS company_status_name_en</span><br><span class="line">                   FROM ((company_profile a</span><br><span class="line">                     LEFT JOIN brand_info b ON (((a.company_id)::text = (b.company_id)::text)))</span><br><span class="line">                     LEFT JOIN config.dictionary c ON (((a.company_status_id)::text = (c.id)::text)))</span><br><span class="line">                  WHERE ((a.company_status_id)::text &lt;&gt; &apos;3.3&apos;::text)) list</span><br><span class="line">          GROUP BY list.company_id, list.ticker, list.company_status_id, list.company_name_cn, list.company_name_en, list.company_shortname_cn, list.company_shortname_en, list.year_founded, list.company_status_name_cn, list.company_status_name_en) computed_list</span><br><span class="line">) AS RESULT</span><br></pre></td></tr></table></figure>
+<h5 id="查询方式"><a href="#查询方式" class="headerlink" title="查询方式"></a>查询方式</h5><p>说明 ts 为查询用的列<br>order by 通过权重和 ts_rank(和搜索词的匹配度) * 10 作为排序规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT</span><br><span class="line">	company_id AS &quot;companyId&quot;,</span><br><span class="line">	company_logo AS &quot;companyLogo&quot;,</span><br><span class="line">	ticker,</span><br><span class="line">	brand_name as &quot;brandName&quot;,</span><br><span class="line">	company_status_id AS &quot;companyStatusId&quot;,</span><br><span class="line">	company_name_cn AS &quot;companyNameCn&quot;,</span><br><span class="line">	company_name_en AS &quot;companyNameEn&quot;,</span><br><span class="line">	company_shortname_cn AS &quot;companyShortnameCn&quot;,</span><br><span class="line">	company_shortname_en AS &quot;companyShortnameEn&quot;,</span><br><span class="line">	ts_rank(</span><br><span class="line">		ts,</span><br><span class="line">		to_tsquery(&apos;zhcfg&apos;,lower(&apos;海思&apos;))</span><br><span class="line">	) * 10 + weight AS RANK</span><br><span class="line">FROM</span><br><span class="line">	search_company</span><br><span class="line">WHERE</span><br><span class="line">-- 原本的全文搜索方式</span><br><span class="line">-- 	ts @@ (phraseto_tsquery(&apos;zhcfg&apos;,lower(&apos;海思&apos;)) || phraseto_tsquery(&apos;zhcfg&apos;,upper(&apos;海思&apos;)))</span><br><span class="line">-- 通过模糊查询保证顺序 9.6可以更换为原本的全文搜索添加距离部分来完成</span><br><span class="line">	ts::text ~ upper(&apos;海思&apos;)</span><br><span class="line">	or</span><br><span class="line">	ts:: text ~ lower(&apos;海思&apos;)</span><br><span class="line">ORDER BY</span><br><span class="line">	RANK DESC</span><br><span class="line">LIMIT 25</span><br></pre></td></tr></table></figure>
+<h4 id="拼音查询配置"><a href="#拼音查询配置" class="headerlink" title="拼音查询配置"></a>拼音查询配置</h4><ul>
+<li>构建函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">create or replace function get_pinyin(vhz text, return_type text = &apos;py&apos;) returns text as $$</span><br><span class="line">declare</span><br><span class="line">  res_py text;</span><br><span class="line">  res_zm text;</span><br><span class="line">  tmp_py text;</span><br><span class="line">  tmp_zm text;</span><br><span class="line">begin</span><br><span class="line">res_py:=&apos;&apos;;</span><br><span class="line">res_zm:=&apos;&apos;;</span><br><span class="line">-- 循环每个字进行替换</span><br><span class="line">for i in 1..length(vhz)</span><br><span class="line">loop</span><br><span class="line">  select py,zm into tmp_py,tmp_zm from config.pinyin where hz=substring(vhz, i, 1);</span><br><span class="line">  if not found then</span><br><span class="line">    res_py := res_py || substring(vhz, i, 1);</span><br><span class="line">    res_zm := res_zm || substring(vhz, i, 1);</span><br><span class="line">  else</span><br><span class="line">    res_py := res_py || tmp_py;</span><br><span class="line">    res_zm := res_zm || tmp_zm;</span><br><span class="line">  end if;</span><br><span class="line">end loop;</span><br><span class="line">-- return lower(res_py || &apos; &apos; || res_zm);</span><br><span class="line">-- return return_type;</span><br><span class="line">-- 根据return type来看返回首字母还是全拼音</span><br><span class="line">if return_type = &apos;py&apos; then</span><br><span class="line">  return lower(res_py);</span><br><span class="line">else</span><br><span class="line">  return lower(res_zm);</span><br><span class="line">end if;</span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line">$$ language plpgsql strict immutable;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引入表 py.sql(有道云)</li>
+<li>把分词结果转为拼音<code>get_pinyin(&#39;上海&#39;)</code></li>
+</ul>
+<h4 id="重建索引-需要使用-pg-trgm"><a href="#重建索引-需要使用-pg-trgm" class="headerlink" title="重建索引 需要使用 pg_trgm"></a>重建索引 需要使用 pg_trgm</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-- 引入 trgm</span><br><span class="line">create extension pg_trgm;</span><br><span class="line">create or replace function record_to_text(anyelement) returns text as $$</span><br><span class="line">  select $1::text;</span><br><span class="line">$$ language sql strict immutable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">create or replace function textsend_i (text) returns bytea as $$</span><br><span class="line">  select textsend($1);</span><br><span class="line">$$ language sql strict immutable;</span><br><span class="line"></span><br><span class="line">-- 重建部分</span><br><span class="line">drop index idx_search_company_ts ;</span><br><span class="line">create index idx_search_company_ts on search_company using gin(record_to_text(search_company) gin_trgm_ops);</span><br></pre></td></tr></table></figure>
+<h4 id="词典"><a href="#词典" class="headerlink" title="词典"></a>词典</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 往自定义分词词典里面插入新的分词</span><br><span class="line">insert into pg_ts_custom_word values (&apos;保障房资&apos;);</span><br><span class="line">-- 使新的分词生效</span><br><span class="line">select zhprs_sync_dict_xdb();</span><br><span class="line">-- 退出此连接</span><br></pre></td></tr></table></figure>
+<h4 id="跨数据库"><a href="#跨数据库" class="headerlink" title="跨数据库"></a>跨数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">create database product_v2_back with template template0 lc_collate &apos;zh_CN.utf8&apos; lc_ctype &apos;zh_CN.utf8&apos;;</span><br><span class="line">create extension postgres_fdw;</span><br><span class="line">create server aliyun foreign data wrapper postgres_fdw options(dbname &apos;product_v2&apos;);</span><br><span class="line">create user mapping for jydreader server aliyun options(user &apos;jydreader&apos;,password &apos;Jyd6789!&apos;);</span><br><span class="line"></span><br><span class="line">CREATE FOREIGN TABLE search_engine(</span><br><span class="line">ticker varchar,</span><br><span class="line">company_logo varchar,</span><br><span class="line">company_status_id varchar,</span><br><span class="line">company_name_cn varchar,</span><br><span class="line">company_name_en varchar,</span><br><span class="line">company_shortname_cn varchar,</span><br><span class="line">company_shortname_en varchar,</span><br><span class="line">brand_name varchar,</span><br><span class="line">year_founded varchar,</span><br><span class="line">company_status_name_cn varchar,</span><br><span class="line">company_status_name_en varchar,</span><br><span class="line">weight varchar,</span><br><span class="line">ts tsvector</span><br><span class="line">) server aliyun options (schema_name &apos;public&apos;,table_name &apos;search_engine&apos;);</span><br></pre></td></tr></table></figure>
+<h4 id="两个字的搜索加速-gin-索引"><a href="#两个字的搜索加速-gin-索引" class="headerlink" title="两个字的搜索加速(gin 索引)"></a>两个字的搜索加速(gin 索引)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">create or replace function split_gin_accelerate(text) returns text[] as $$</span><br><span class="line">declare</span><br><span class="line">  res text[];</span><br><span class="line">begin</span><br><span class="line">  select regexp_split_to_array($1,&apos;&apos;) into res;</span><br><span class="line">  for i in 1..length($1)-1 loop</span><br><span class="line">    res := array_append(res, substring($1,i,2));</span><br><span class="line">  end loop;</span><br><span class="line">  return res;</span><br><span class="line">end;</span><br><span class="line">$$ language plpgsql strict immutable;</span><br><span class="line"></span><br><span class="line">-- create index ids_foreign_search_engine_gin on foreign_search_engine using gin (record_to_text(foreign_search_engine) gin_trgm_ops) ;</span><br><span class="line">-- create index ids_foreign_search_engine_gist on foreign_search_engine using gin (record_to_text(foreign_search_engine) gin_trgm_ops) ;</span><br><span class="line">create index idx_foreign_search_engine_split_gin_accelerate on foreign_search_engine using gin (split_gin_accelerate(record_to_text(foreign_search_engine)));</span><br></pre></td></tr></table></figure>
+<h2 id="后续开发计划"><a href="#后续开发计划" class="headerlink" title="后续开发计划"></a>后续开发计划</h2><ol>
+<li>搜索引擎支持权重查询(完成) <a href="https://github.com/digoal/blog/blob/master/201604/20160419_01.md" target="_blank" rel="noopener">教程</a></li>
+<li>支持相似搜索 <a href="https://github.com/digoal/blog/blob/936be5892997fa312f8882977054066d852c77a4/201608/20160817_01.md" target="_blank" rel="noopener">教程</a></li>
+<li><p>支持拼音搜索(完成) <a href="https://github.com/digoal/blog/blob/master/201611/20161109_01.md?spm=5176.100239.blogcont64240.26.FVsDwc&amp;file=20161109_01.md" target="_blank" rel="noopener">教程</a> <a href="https://github.com/digoal/blog/blob/master/201605/20160511_01.md" target="_blank" rel="noopener">2</a> <a href="https://github.com/digoal/blog/blob/master/201612/20161205_01.md" target="_blank" rel="noopener">排序</a></p>
+</li>
+<li><p>自定义词典 <a href="https://github.com/digoal/blog/blob/76b23d76ae9ce9ec80bc836e6a2850f7a965e808/201603/20160310_01.md" target="_blank" rel="noopener">文章</a></p>
+</li>
+<li>高效筛选 <a href="https://github.com/digoal/blog/blob/master/201706/20170607_02.md" target="_blank" rel="noopener">文章</a></li>
+</ol>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2019/10/18/postgresql 全文搜索引擎/">https://www.mizuka.top/2019/10/18/postgresql 全文搜索引擎/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2019/10/18/postgresql 全文搜索引擎/">October 18th 2019, 5:41:57 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/10/18/文字超过x行后补上省略号的几种办法/" title= 文字超过x行后补上省略号的几种办法 >
+                    <div class="prevTitle">文字超过x行后补上省略号的几种办法</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "0eAmMMUxqe9alLwt4KzftCnv-gzGzoHsz",
+        appKey: "PfYhgvohzSQStMaJHaneYXq9",
+        placeholder: "给我个留言吧！",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:mizuka.wu@outlook.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mizuka-wu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/1383044/" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 谷歌广告 -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-7475107856528468",
+    enable_page_level_ads: true
+  });
+</script>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#带权重的搜索引擎"><span class="toc-number">1.</span> <span class="toc-text">带权重的搜索引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实施流程"><span class="toc-number">1.1.</span> <span class="toc-text">具体实施流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分词-英文基本无需分词"><span class="toc-number">1.1.1.</span> <span class="toc-text">分词(英文基本无需分词)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#zhparser"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">zhparser</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按照字段进行搜索"><span class="toc-number">1.1.2.</span> <span class="toc-text">按照字段进行搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索用的固态视图"><span class="toc-number">1.1.3.</span> <span class="toc-text">搜索用的固态视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特性"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">特性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#查询方式"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">查询方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拼音查询配置"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">拼音查询配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重建索引-需要使用-pg-trgm"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">重建索引 需要使用 pg_trgm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#词典"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">词典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跨数据库"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">跨数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#两个字的搜索加速-gin-索引"><span class="toc-number">1.1.3.6.</span> <span class="toc-text">两个字的搜索加速(gin 索引)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后续开发计划"><span class="toc-number">1.2.</span> <span class="toc-text">后续开发计划</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 32
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/postgresql 全文搜索引擎/" >postgresql全文搜索引擎</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/文字超过x行后补上省略号的几种办法/" >文字超过x行后补上省略号的几种办法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2019/10/11/react-route4实现prompt自定义样式/" >react-route4实现prompt自定义样式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2019/09/23/自动给表格空单元格补上字符串/" >自动给表格空单元格补上字符串</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/09</span><a class="archive-post-title" href= "/2019/09/09/纯css实现table表头吸顶/" >纯css实现table表头吸顶</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/04</span><a class="archive-post-title" href= "/2019/09/04/axios兜底错误处理/" >axios兜底错误处理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/vscode在debugger的时候如何加载插件/" >vscode在debugger的时候如何加载插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/umi.js约定式路由如何生成breadcrumbs/" >umi.js约定式路由如何生成breadcrumbs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/2019/07/12/正则/" >常用正则</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/上传app卡在通过App store进行鉴定/" >上传app卡在通过app store进行鉴定</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/Android如何直接投屏到电脑/" >Android如何直接投屏到电脑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/15</span><a class="archive-post-title" href= "/2019/06/15/一次node内存泄漏调查/" >一次node内存泄漏的调查</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/10</span><a class="archive-post-title" href= "/2019/06/10/一次node内存泄漏排查和解决/" >一次node内存泄漏排查和解决</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2019/06/05/如何删除除了Master之外的所有分支/" >如何删除除了Master之外的所有分支</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2019/04/10/有关前端和pdf相关的几件事/" >有关前端和pdf相关的几件事</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2019/03/29/axios如何中断请求/" >axios如何中断请求</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2019/02/11/Mac前端上手指南/" >Mac前端上手指南</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2019/01/03/我们是怎么从ng迁移到vue的/" >我们是怎么从ng迁移到vue的</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2018/12/15/RTAC86U刷机指南/" >RTAC86U刷机指南</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2018/12/04/android导致文字偏上的问题/" >android导致文字偏上的问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2018/11/18/电视直播源分享/" >电视直播源分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/2018/11/13/小微企业验证码破解/" >小微企业验证码破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2018/11/09/vscode插件分享/" >vscode插件分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/学js很简单，就是有点头冷1/" >学js很简单，就是有点头冷（1从工程化开始）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学js很简单，就是有点头冷0/" >学js很简单，就是有点头冷（0，大概是绪论）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/情侣日常1/" >情侣日常1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2018/10/18/从js数组重查找出重复元素的方法/" >从js数组重查找出重复元素的方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/教你如何构建Mojave动态壁纸/" >教你如何构建Mojave动态壁纸</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/15</span><a class="archive-post-title" href= "/2018/10/15/记不住快捷键怎么办/" >记不住快捷键怎么办</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="可以公开的情报"><span class="iconfont-archer">&#xe606;</span>可以公开的情报</span>
+    
+        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="android"><span class="iconfont-archer">&#xe606;</span>android</span>
+    
+        <span class="sidebar-tag-name" data-tags="上手指南"><span class="iconfont-archer">&#xe606;</span>上手指南</span>
+    
+        <span class="sidebar-tag-name" data-tags="MAC"><span class="iconfont-archer">&#xe606;</span>MAC</span>
+    
+        <span class="sidebar-tag-name" data-tags="经验"><span class="iconfont-archer">&#xe606;</span>经验</span>
+    
+        <span class="sidebar-tag-name" data-tags="line-height"><span class="iconfont-archer">&#xe606;</span>line-height</span>
+    
+        <span class="sidebar-tag-name" data-tags="font-size"><span class="iconfont-archer">&#xe606;</span>font-size</span>
+    
+        <span class="sidebar-tag-name" data-tags="axios"><span class="iconfont-archer">&#xe606;</span>axios</span>
+    
+        <span class="sidebar-tag-name" data-tags="promise"><span class="iconfont-archer">&#xe606;</span>promise</span>
+    
+        <span class="sidebar-tag-name" data-tags="错误处理"><span class="iconfont-archer">&#xe606;</span>错误处理</span>
+    
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+    
+        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
+    
+        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
+    
+        <span class="sidebar-tag-name" data-tags="react-route"><span class="iconfont-archer">&#xe606;</span>react-route</span>
+    
+        <span class="sidebar-tag-name" data-tags="prompt"><span class="iconfont-archer">&#xe606;</span>prompt</span>
+    
+        <span class="sidebar-tag-name" data-tags="退出校验"><span class="iconfont-archer">&#xe606;</span>退出校验</span>
+    
+        <span class="sidebar-tag-name" data-tags="RTAC86U"><span class="iconfont-archer">&#xe606;</span>RTAC86U</span>
+    
+        <span class="sidebar-tag-name" data-tags="乳酸菌"><span class="iconfont-archer">&#xe606;</span>乳酸菌</span>
+    
+        <span class="sidebar-tag-name" data-tags="gfw"><span class="iconfont-archer">&#xe606;</span>gfw</span>
+    
+        <span class="sidebar-tag-name" data-tags="插件"><span class="iconfont-archer">&#xe606;</span>插件</span>
+    
+        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
+    
+        <span class="sidebar-tag-name" data-tags="chrome"><span class="iconfont-archer">&#xe606;</span>chrome</span>
+    
+        <span class="sidebar-tag-name" data-tags="umi.js"><span class="iconfont-archer">&#xe606;</span>umi.js</span>
+    
+        <span class="sidebar-tag-name" data-tags="面包屑"><span class="iconfont-archer">&#xe606;</span>面包屑</span>
+    
+        <span class="sidebar-tag-name" data-tags="路由"><span class="iconfont-archer">&#xe606;</span>路由</span>
+    
+        <span class="sidebar-tag-name" data-tags="约定式路由"><span class="iconfont-archer">&#xe606;</span>约定式路由</span>
+    
+        <span class="sidebar-tag-name" data-tags="笔记"><span class="iconfont-archer">&#xe606;</span>笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="学习"><span class="iconfont-archer">&#xe606;</span>学习</span>
+    
+        <span class="sidebar-tag-name" data-tags="记录"><span class="iconfont-archer">&#xe606;</span>记录</span>
+    
+        <span class="sidebar-tag-name" data-tags="ios"><span class="iconfont-archer">&#xe606;</span>ios</span>
+    
+        <span class="sidebar-tag-name" data-tags="ecmascript"><span class="iconfont-archer">&#xe606;</span>ecmascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="数组"><span class="iconfont-archer">&#xe606;</span>数组</span>
+    
+        <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
+    
+        <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
+    
+        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="日常"><span class="iconfont-archer">&#xe606;</span>日常</span>
+    
+        <span class="sidebar-tag-name" data-tags="祉华"><span class="iconfont-archer">&#xe606;</span>祉华</span>
+    
+        <span class="sidebar-tag-name" data-tags="OSX"><span class="iconfont-archer">&#xe606;</span>OSX</span>
+    
+        <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
+    
+        <span class="sidebar-tag-name" data-tags="超过x行"><span class="iconfont-archer">&#xe606;</span>超过x行</span>
+    
+        <span class="sidebar-tag-name" data-tags="省略号"><span class="iconfont-archer">&#xe606;</span>省略号</span>
+    
+        <span class="sidebar-tag-name" data-tags="overflow"><span class="iconfont-archer">&#xe606;</span>overflow</span>
+    
+        <span class="sidebar-tag-name" data-tags="pdf"><span class="iconfont-archer">&#xe606;</span>pdf</span>
+    
+        <span class="sidebar-tag-name" data-tags="表格"><span class="iconfont-archer">&#xe606;</span>表格</span>
+    
+        <span class="sidebar-tag-name" data-tags="吸顶"><span class="iconfont-archer">&#xe606;</span>吸顶</span>
+    
+        <span class="sidebar-tag-name" data-tags="sticky"><span class="iconfont-archer">&#xe606;</span>sticky</span>
+    
+        <span class="sidebar-tag-name" data-tags="单元格"><span class="iconfont-archer">&#xe606;</span>单元格</span>
+    
+        <span class="sidebar-tag-name" data-tags="补全"><span class="iconfont-archer">&#xe606;</span>补全</span>
+    
+        <span class="sidebar-tag-name" data-tags="软件推荐"><span class="iconfont-archer">&#xe606;</span>软件推荐</span>
+    
+        <span class="sidebar-tag-name" data-tags="镜音"><span class="iconfont-archer">&#xe606;</span>镜音</span>
+    
+        <span class="sidebar-tag-name" data-tags="cos"><span class="iconfont-archer">&#xe606;</span>cos</span>
+    
+        <span class="sidebar-tag-name" data-tags="镜音len"><span class="iconfont-archer">&#xe606;</span>镜音len</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据库"><span class="iconfont-archer">&#xe606;</span>数据库</span>
+    
+        <span class="sidebar-tag-name" data-tags="搜索引擎"><span class="iconfont-archer">&#xe606;</span>搜索引擎</span>
+    
+        <span class="sidebar-tag-name" data-tags="postgresql"><span class="iconfont-archer">&#xe606;</span>postgresql</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="ng"><span class="iconfont-archer">&#xe606;</span>ng</span>
+    
+        <span class="sidebar-tag-name" data-tags="迁移"><span class="iconfont-archer">&#xe606;</span>迁移</span>
+    
+        <span class="sidebar-tag-name" data-tags="angularJs"><span class="iconfont-archer">&#xe606;</span>angularJs</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="可以公开的情报"><span class="iconfont-archer">&#xe60a;</span>可以公开的情报</span>
+    
+        <span class="sidebar-category-name" data-categories="开发的捷径"><span class="iconfont-archer">&#xe60a;</span>开发的捷径</span>
+    
+        <span class="sidebar-category-name" data-categories="学习笔记"><span class="iconfont-archer">&#xe60a;</span>学习笔记</span>
+    
+        <span class="sidebar-category-name" data-categories="祉华"><span class="iconfont-archer">&#xe60a;</span>祉华</span>
+    
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
+    
+        <span class="sidebar-category-name" data-categories="Cos"><span class="iconfont-archer">&#xe60a;</span>Cos</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mizuka"
+    }
+</script>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
