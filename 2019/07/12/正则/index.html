@@ -462,7 +462,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="正则大全"><a href="#正则大全" class="headerlink" title="正则大全   "></a>正则大全 <img src="https://img.shields.io/badge/状态-积极更新-673ab7.svg" alt=""> <img src="https://img.shields.io/badge/已收录-47条-4caf50.svg" alt=""> <img src="https://img.shields.io/badge/license-MIT-F44336.svg" alt=""></h1><p>:whale:图形界面: <a href="https://any86.github.io/any-rule/" target="_blank" rel="noopener">https://any86.github.io/any-rule/</a></p>
-<h2 id="html-注释"><a href="#html-注释" class="headerlink" title="html 注释"></a>html 注释</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&lt;!--(.*?)--&gt;$/;</span><br></pre></td></tr></table></figure>
+<h2 id="html-注释"><a href="#html-注释" class="headerlink" title="html 注释"></a>html 注释</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="xml"><span class="comment">&lt;!--(.*?)--&gt;</span>$/;</span></span><br></pre></td></tr></table></figure>
 <h2 id="md5-格式-32-位"><a href="#md5-格式-32-位" class="headerlink" title="md5 格式(32 位)"></a>md5 格式(32 位)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-f0<span class="number">-9</span>]&#123;<span class="number">32</span>&#125;$/;</span><br></pre></td></tr></table></figure>
 <h2 id="版本号格式必须为-X-Y-Z"><a href="#版本号格式必须为-X-Y-Z" class="headerlink" title="版本号格式必须为 X.Y.Z"></a>版本号格式必须为 X.Y.Z</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d+(\.\d+)&#123;<span class="number">2</span>&#125;$/;</span><br></pre></td></tr></table></figure>
 <h2 id="视频链接地址（视频格式可按需增删）"><a href="#视频链接地址（视频格式可按需增删）" class="headerlink" title="视频链接地址（视频格式可按需增删）"></a>视频链接地址（视频格式可按需增删）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^https?:\/\/.*?(swf|avi|flv|mpg|rm|mov|wav|asf|<span class="number">3</span>gp|mkv|rmvb|mp4)$/i;</span><br></pre></td></tr></table></figure>
@@ -494,7 +494,7 @@ height:50vh;
 <h2 id="是否小数"><a href="#是否小数" class="headerlink" title="是否小数"></a>是否小数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d+\.\d+$/;</span><br></pre></td></tr></table></figure>
 <h2 id="电话-座机"><a href="#电话-座机" class="headerlink" title="电话(座机)"></a>电话(座机)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">0</span>\d&#123;<span class="number">2</span>,<span class="number">3</span>&#125;-\d&#123;<span class="number">7</span>,<span class="number">8</span>&#125;$/;</span><br></pre></td></tr></table></figure>
 <h2 id="纯数字"><a href="#纯数字" class="headerlink" title="纯数字"></a>纯数字</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">1</span>,&#125;$/;</span><br></pre></td></tr></table></figure>
-<h2 id="是否-html-标签"><a href="#是否-html-标签" class="headerlink" title="是否 html 标签"></a>是否 html 标签</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;/;</span><br></pre></td></tr></table></figure>
+<h2 id="是否-html-标签"><a href="#是否-html-标签" class="headerlink" title="是否 html 标签"></a>是否 html 标签</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="xml"><span class="tag">&lt;<span class="name">(.*)</span>&gt;</span>.*<span class="tag">&lt;<span class="name">\</span>/\<span class="attr">1</span>&gt;</span>|<span class="tag">&lt;<span class="name">(.*)</span> \/&gt;</span>/;</span></span><br></pre></td></tr></table></figure>
 <h2 id="是否-qq-号格式正确"><a href="#是否-qq-号格式正确" class="headerlink" title="是否 qq 号格式正确"></a>是否 qq 号格式正确</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">4</span>,<span class="number">10</span>&#125;$/;</span><br></pre></td></tr></table></figure>
 <h2 id="是否由数字和字母组成"><a href="#是否由数字和字母组成" class="headerlink" title="是否由数字和字母组成"></a>是否由数字和字母组成</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[A-Za-z0<span class="number">-9</span>]+$/;</span><br></pre></td></tr></table></figure>
 <h2 id="纯英文字母"><a href="#纯英文字母" class="headerlink" title="纯英文字母"></a>纯英文字母</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z]+$/;</span><br></pre></td></tr></table></figure>
@@ -1087,9 +1087,26 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -1106,6 +1123,21 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/文字超过x行后补上省略号的几种办法/" >文字超过x行后补上省略号的几种办法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2019/10/18/RN2Flutter/" >[Untitled Post]</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1144,12 +1176,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/Android如何直接投屏到电脑/" >Android如何直接投屏到电脑</a>
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/上传app卡在通过App store进行鉴定/" >上传app卡在通过app store进行鉴定</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/上传app卡在通过App store进行鉴定/" >上传app卡在通过app store进行鉴定</a>
+            <span class="archive-post-date">07/09</span><a class="archive-post-title" href= "/2019/07/09/Android如何直接投屏到电脑/" >Android如何直接投屏到电脑</a>
         </li>
     
     
@@ -1242,55 +1274,18 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/10/11/webpack正确的引入pdfjs/" >webpack正确的引入pdf.js</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/10/11/RN2Flutter/" >[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
             <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/教你如何构建Mojave动态壁纸/" >教你如何构建Mojave动态壁纸</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-朋克/" >镜音len-朋克</a>
+            <span class="archive-post-date">10/16</span><a class="archive-post-title" href= "/2018/10/16/镜音len-刹月华/" >镜音len-刹月华</a>
         </li>
     
     
@@ -1386,6 +1381,12 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="mojave"><span class="iconfont-archer">&#xe606;</span>mojave</span>
     
         <span class="sidebar-tag-name" data-tags="动态壁纸"><span class="iconfont-archer">&#xe606;</span>动态壁纸</span>
+    
+        <span class="sidebar-tag-name" data-tags="超过x行"><span class="iconfont-archer">&#xe606;</span>超过x行</span>
+    
+        <span class="sidebar-tag-name" data-tags="省略号"><span class="iconfont-archer">&#xe606;</span>省略号</span>
+    
+        <span class="sidebar-tag-name" data-tags="overflow"><span class="iconfont-archer">&#xe606;</span>overflow</span>
     
         <span class="sidebar-tag-name" data-tags="pdf"><span class="iconfont-archer">&#xe606;</span>pdf</span>
     
