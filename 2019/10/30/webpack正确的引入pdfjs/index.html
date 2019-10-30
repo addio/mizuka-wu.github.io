@@ -15,7 +15,7 @@
   <meta name="description" content="水华的博客，coser和前端记录" />
   <meta name="Cache-Control" content="no-cache" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>如何删除除了Master之外的所有分支 · 水华的博客</title>
+  <title>webpack正确的引入pdf.js · 水华的博客</title>
   <link rel="manifest" href="/manifest.json" />
   <style type="text/css">
     @font-face {
@@ -276,7 +276,7 @@
                 <a href="/" >水华的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">如何删除除了Master之外的所有分支</a>
+                <a href="#" class="post-name">webpack正确的引入pdf.js</a>
             </div>
     </div>
     
@@ -308,7 +308,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            如何删除除了Master之外的所有分支
+            webpack正确的引入pdf.js
             <!-- 404 -->
             
         </h1>
@@ -327,24 +327,24 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "前端">前端</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "vscode">vscode</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "上手指南">上手指南</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "笔记">笔记</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "MAC">MAC</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "学习">学习</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "经验">经验</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "记录">记录</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">41</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">131</span> / Reading time: <span class="post-count">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/06/05</span>
+                    <span class="post-intro-time">2019/10/30</span>
                     
                     <span class="shareWrapper">
                         <span class="iconfont-archer shareIcon">&#xe71d;</span>
@@ -463,19 +463,18 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="如何删除除了-Master-之外的所有分支"><a href="#如何删除除了-Master-之外的所有分支" class="headerlink" title="如何删除除了 Master 之外的所有分支"></a>如何删除除了 Master 之外的所有分支</h1><ol>
-<li>切换到 master</li>
-<li>删了其他的</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash &amp;&amp; git checkout master &amp;&amp; git branch | grep -v <span class="string">"master"</span> | xargs git branch -D</span><br></pre></td></tr></table></figure>
+        <h1 id="pdf-js"><a href="#pdf-js" class="headerlink" title="pdf.js"></a>pdf.js</h1><p>废话不多说,直接上代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdfjs <span class="keyword">from</span> <span class="string">'pdfjs-dist/webpack'</span></span><br></pre></td></tr></table></figure>
+<p>简单明了，不用考虑 pdf.worker.js,不用考虑 cdn</p>
+<h2 id="附上最近做的-pdf-生成和导出的两个库的基础配置"><a href="#附上最近做的-pdf-生成和导出的两个库的基础配置" class="headerlink" title="附上最近做的 pdf 生成和导出的两个库的基础配置"></a>附上最近做的 pdf 生成和导出的两个库的基础配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdfMake <span class="keyword">from</span> <span class="string">'pdfmake-support-chinese-fonts/pdfmake.min'</span></span><br><span class="line"><span class="keyword">import</span> pdfFonts <span class="keyword">from</span> <span class="string">'pdfmake-support-chinese-fonts/vfs_fonts'</span></span><br><span class="line"><span class="keyword">import</span> pdfjs <span class="keyword">from</span> <span class="string">'pdfjs-dist/webpack'</span></span><br><span class="line">pdfMake.vfs = pdfFonts.pdfMake.vfs</span><br><span class="line">pdfMake.fonts = &#123;</span><br><span class="line">  Roboto: &#123;</span><br><span class="line">    normal: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    bold: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    italics: <span class="string">'Roboto-Regular.ttf'</span>,</span><br><span class="line">    bolditalics: <span class="string">'Roboto-Regular.ttf'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  fangzhen: &#123;</span><br><span class="line">    normal: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    bold: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    italics: <span class="string">'fzhei-jt.TTF'</span>,</span><br><span class="line">    bolditalics: <span class="string">'fzhei-jt.TTF'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> pdfMaker = pdfMake</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> pdfViewer = pdfjs</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者: <a href="https://www.mizuka.top">Mizuka</a>
-            <p>原文链接: <a href="https://www.mizuka.top/2019/06/05/如何删除除了Master之外的所有分支/">https://www.mizuka.top/2019/06/05/如何删除除了Master之外的所有分支/</a>
-            <p>发表日期: <a href="https://www.mizuka.top/2019/06/05/如何删除除了Master之外的所有分支/">June 5th 2019, 11:41:57 am</a>
+            <p>原文链接: <a href="https://www.mizuka.top/2019/10/30/webpack正确的引入pdfjs/">https://www.mizuka.top/2019/10/30/webpack正确的引入pdfjs/</a>
+            <p>发表日期: <a href="https://www.mizuka.top/2019/10/30/webpack正确的引入pdfjs/">October 30th 2019, 7:16:20 am</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -483,17 +482,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/06/10/一次node内存泄漏排查和解决/" title= 一次node内存泄漏排查和解决 >
-                    <div class="nextTitle">一次node内存泄漏排查和解决</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/04/10/有关前端和pdf相关的几件事/" title= 有关前端和pdf相关的几件事 >
-                    <div class="prevTitle">有关前端和pdf相关的几件事</div>
+                <a href= "/2019/10/29/一次Rem莫名失效的解决/" title= 一次Rem莫名失效的解决过程 >
+                    <div class="prevTitle">一次Rem莫名失效的解决过程</div>
                 </a>
             
         </li>
@@ -614,7 +608,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何删除除了-Master-之外的所有分支"><span class="toc-number">1.</span> <span class="toc-text">如何删除除了 Master 之外的所有分支</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pdf-js"><span class="toc-number">1.</span> <span class="toc-text">pdf.js</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#附上最近做的-pdf-生成和导出的两个库的基础配置"><span class="toc-number">1.1.</span> <span class="toc-text">附上最近做的 pdf 生成和导出的两个库的基础配置</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
