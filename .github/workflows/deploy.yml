@@ -31,4 +31,4 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
           PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./pages
+          PUBLISH_DIR: ./public
