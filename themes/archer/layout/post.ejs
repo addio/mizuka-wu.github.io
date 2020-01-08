@@ -1,15 +1,15 @@
 <main class="main post-page">
     <article class="article-entry">
         <%- page.content %>
+        <!-- qrcode -->
+        <blockquote>
+            <p>也欢迎关注我的公共号，开源项目，Cos作品都能看哦，不会女装的程序员不是好Coser</p>
+        </blockquote>
+        <p>
+            <a class="fancy-link" href="img/qrcode.png" alt="" data-fancybox="group" data-caption=""><img
+                    src="https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/qrcode.bmp" alt=""></a>
+        </p>
     </article>
-    <!-- qrcode -->
-    <blockquote>
-        <p>也欢迎关注我的公共号，开源项目，Cos作品都能看哦，不会女装的程序员不是好Coser</p>
-    </blockquote>
-    <p>
-        <a class="fancy-link" href="img/qrcode.png" alt="" data-fancybox="group" data-caption=""><img
-                src="https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/qrcode.bmp" alt=""></a>
-    </p>
     <!-- license  -->
     <% if(theme.copyright.enable === true && page.copyright !== false) { %>
     <div class="license-wrapper">
