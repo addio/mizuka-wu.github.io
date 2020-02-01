@@ -50,3 +50,13 @@ module.exports = {
   }
 }
 ```
+
+### 找不到定义文件
+
+在`tsconfig.json`的`compilerOptions`里加上类型定义
+
+```javascript
+{
+    "typeRoots": ["./node_modules/@types", "./types"],
+}
+```
