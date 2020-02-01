@@ -60,3 +60,7 @@ module.exports = {
     "typeRoots": ["./node_modules/@types", "./types"],
 }
 ```
+
+### debounce 的方法丢失了 this
+
+把这个赋值从 methods 中移动到 created/data 中，同时使用`const vm = this`来绑定 this，避免 ts 上的`this`绑定问题
