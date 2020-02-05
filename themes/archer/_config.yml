@@ -8,22 +8,21 @@ signature: 知行合一
 # SNS
 social:
   email: mizuka.wu@outlook.com
-  github: //github.com/mizuka-wu
+  github: https://github.com/mizuka-wu
   # wechat and qq should be a path of qr-code image
   wechat: https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/assets/example_qr.png
-  zhihu: 
-  twitter: 
-  instagram: 
+  instagram: https://www.instagram.com/mizuka51v
   bilibili: https://space.bilibili.com/1383044/
   rss: /atom.xml
 # friends
 friends:
   掘金主页: //juejin.im/user/5930b38a2f301e006bd366c0
-  简书: //www.jianshu.com/u/6e96ca25886f
-  最近项目: //https://www.mizuka.top/vue-pdfmake/
+  vue2-typeahead: https://github.com/mizuka-wu/vue2-typeahead
+  Seed: https://github.com/mizuka-wu/Seed
+  vue2-verify: https://github.com/mizuka-wu/vue2-verify
 about:
   enable: true
-  image: 'https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/about-bg.jpg'
+  image: "https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/about-bg.jpg"
 
 # ========== Site ========== #
 # title of the site
@@ -33,11 +32,11 @@ main_title: 水华的博客
 # subtitle
 subtitle: 这年头决定命运的，是情报
 # site haeder image
-site_header_image: 'https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/index-bg.jpg'
+site_header_image: "https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/index-bg.jpg"
 # post haeder image
-post_header_image: 'https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/post-bg.jpg'
+post_header_image: "https://mizuka-blog.oss-cn-shanghai.aliyuncs.com/static/intro/post-bg.jpg"
 # 404 image
-_404_image: 'https://source.unsplash.com/random'
+_404_image: "https://source.unsplash.com/random"
 
 # ========== Search ========== #
 algolia_search:
@@ -54,14 +53,14 @@ algolia_search:
 # If you want to add other comment plugin, edit in "custom.ejs"
 comment:
   # Livere  site: https://livere.com/
-  livere_uid: 
+  livere_uid:
   # Disqus  site: https://disqus.com/
-  disqus_shortname: 
+  disqus_shortname:
   # Changyan  site: http://changyan.kuaizhan.com/
-  changyan_appid: 
-  changyan_conf: 
+  changyan_appid:
+  changyan_conf:
   # Youyan  site: http://www.uyan.cc/
-  youyan_uid: 
+  youyan_uid:
   # Valine  site: https://valine.js.org/
   valine_appId: "0eAmMMUxqe9alLwt4KzftCnv-gzGzoHsz"
   valine_appKey: "PfYhgvohzSQStMaJHaneYXq9"
@@ -71,21 +70,21 @@ comment:
 # enable Busuanzi analytics
 busuanzi: false
 # fill in pv or uv
-busuanzi_pv_or_uv: 'pv'
+busuanzi_pv_or_uv: "pv"
 # custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
-busuanzi_slug: 'PV: ${count} :)'
+busuanzi_slug: "PV: ${count} :)"
 # Baidu analytics
-baidu_analytics: 
+baidu_analytics:
 # Google analytics
 google_analytics: UA-112738831-1
 # CNZZ analytics
-CNZZ_analytics: 
+CNZZ_analytics:
 
 # ========== Others ========== #
 # favicon
 favicon: /assets/favicon.ico
 # truncate length of abstracts in index page (the default is 300, there will be no abstruct if you input 0)
-truncate_length: 
+truncate_length:
 # enable toc
 toc: true
 # word count & reading time
