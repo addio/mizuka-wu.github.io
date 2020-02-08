@@ -149,3 +149,14 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
 ```
+
+# 附：发布到 release
+
+```yml
+uses: fnkr/github-action-ghr@v1
+  if: startsWith(github.ref, 'refs/tags/')
+  env:
+    GHR_COMPRESS: zip
+    GHR_PATH: lib/
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
