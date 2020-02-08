@@ -144,7 +144,7 @@ jobs:
         with:
           node-version: 10
       - run: npm ci
-      - run: npm build-lib
+      - run: npm run build-lib
       - uses: JS-DevTools/npm-publish@v1
         with:
           env:
@@ -154,7 +154,7 @@ jobs:
 # 附：发布到 release
 
 ```yml
-uses: fnkr/github-action-ghr@v1
+- uses: fnkr/github-action-ghr@v1
   if: startsWith(github.ref, 'refs/tags/')
   env:
     GHR_COMPRESS: zip
