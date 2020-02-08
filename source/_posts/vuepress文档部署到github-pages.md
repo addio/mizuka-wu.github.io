@@ -123,3 +123,29 @@ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
 然后点击`Deploy keys`，添加公钥(`gh-pages.pub`的内容)，`Allow write access`一定要勾上
 
 然后提交即可，接着就会自动发布了
+
+# 附：发布到 npm 脚本
+
+```yml
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm ci
+      - run: npm build-lib
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+```
