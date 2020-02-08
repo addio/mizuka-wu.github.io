@@ -127,6 +127,7 @@ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
 # 附：发布到 npm 脚本
 
 ```yml
+name: publish to npm
 on:
   push:
     branches:
@@ -139,25 +140,63 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
         with:
-          node-version: 10
-      - run: npm ci
-      - run: npm run build-lib
-      - uses: JS-DevTools/npm-publish@v1
+          persist-credentials: false
+      - name: Install
+        run: npm ci && npm run build-lib && npm run changelog
+      - name: publish
+        uses: JS-DevTools/npm-publish@v1
         with:
-          env:
-            token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
 ```
 
 # 附：发布到 release
 
 ```yml
-- uses: fnkr/github-action-ghr@v1
-  if: startsWith(github.ref, 'refs/tags/')
-  env:
-    GHR_COMPRESS: zip
-    GHR_PATH: lib/
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+name: upload release asset
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+      - name: Install
+        run: npm ci && npm run build-lib && npm run changelog
+      - name: Build project # This would actually build your project, using zip for an example artifact
+        run: zip -r lib.zip lib
+      - name: Read Changelog
+        uses: GenesisSam/get-simple-file-action@v1.0.4
+        id: read_changelog
+        with:
+          file-name: ${{ 'lib/CHANGELOG.md' }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{  }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./lib.zip
+          asset_name: lib.zip
+          asset_content_type: application/zip
 ```
