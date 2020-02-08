@@ -147,7 +147,8 @@ jobs:
       - run: npm build-lib
       - uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          env:
+            token: ${{ secrets.NPM_TOKEN }}
 ```
 
 # 附：发布到 release
