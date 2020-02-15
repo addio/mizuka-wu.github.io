@@ -4,8 +4,8 @@ date: 2020-02-15 11:12:53
 tags:
   - js
   - ecmascript
-  - 数组
-  - 技巧
+  - github
+  - github actions
 categories: 开发的捷径
 ---
 
