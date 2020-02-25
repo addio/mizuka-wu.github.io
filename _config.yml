@@ -110,6 +110,13 @@ deploy:
   branch: master #published
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}" #leave this blank
 
+offline:
+  maximumFileSizeToCacheInBytes: 5242880
+  staticFileGlobs:
+    - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  stripPrefix: public
+  verbose: true
+
 live2d:
   enable: true
   scriptFrom: local
