@@ -9,7 +9,6 @@ description: 水华的博客，coser和前端记录
 keywords:
 author: Mizuka
 language: zh-CN
-timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -99,19 +98,6 @@ algolia:
   apiKey: "16bdbd3e031ecae9ae00c3626d819d64"
   indexName: "Blog"
   chunkSize: 5000
-
-# offline config passed to sw-precache.
-offline:
-  maximumFileSizeToCacheInBytes: 5242880
-  staticFileGlobs:
-    - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
-  stripPrefix: public
-  verbose: false
-  runtimeCaching:
-    - urlPattern: /*
-      handler: cacheFirst
-      options:
-        origin: mizuka-blog.oss-cn-shanghai.aliyuncs.com
 
 sitemap:
   path: sitemap.xml
