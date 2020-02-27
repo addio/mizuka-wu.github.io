@@ -150,10 +150,10 @@ name: Sync to Gitee
 on:
   push:
     branches:
-      - master
+      - gh-pages
   pull_request:
     branches:
-      - master
+      - gh-pages
 
 jobs:
   build-and-deploy:
