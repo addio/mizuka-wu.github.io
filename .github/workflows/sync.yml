@@ -9,4 +9,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
         with:
           source-repo: "git@gitee.com:mizuka/Mizuka.gitee.io.git"
-          destination-repo: "git@gitee.com:mizuka/Mizuka.gitee.io.git"
+          destination-repo: "git@gitee.com:mizuka/Mizuka.git"
