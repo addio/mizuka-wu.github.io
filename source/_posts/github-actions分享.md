@@ -125,6 +125,7 @@ jobs:
           BASE_BRANCH: master
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
+          CLEAN: true
           SSH: true # SSH must be set to true so the deploy action knows which protocol to deploy with.
 ```
 
