@@ -146,23 +146,16 @@ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
 # Gitee 同步
 
 ```yml
-name: Sync to Gitee
-on:
-  push:
-    branches:
-      - gh-pages
-  pull_request:
-    branches:
-      - gh-pages
-
+name: Sync To Gitee
+on: page_build
 jobs:
-  build-and-deploy:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - uses: wearerequired/git-mirror-action@master
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
         with:
-          source-repo: "git@github.com:wearerequired/git-mirror-action.git"
-          destination-repo: "git@bitbucket.org:wearerequired/git-mirror-action.git"
+          source-repo: "git@gitee.com:mizuka/Mizuka.gitee.io.git"
+          destination-repo: "git@gitee.com:mizuka/Mizuka.gitee.io.git"
 ```
