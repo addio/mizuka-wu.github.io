@@ -13,8 +13,5 @@ jobs:
       - name: reload
         uses: mizuka-wu/gitee-pages-action@v1.0.0
         with:
-          repository: your_github_name/repository_name
+          repository: mizuka/Mizuka
           cookie: ${{ secrets.GITEE_COOKIE }}
-          branch: master
-          directory: src
-          https: true
