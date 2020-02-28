@@ -10,3 +10,11 @@ jobs:
         with:
           source-repo: "git@github.com:mizuka-wu/mizuka-wu.github.io.git"
           destination-repo: "git@gitee.com:mizuka/Mizuka.git"
+      - name: reload
+        uses: mizuka-wu/gitee-pages-action@v1.0.0
+        with:
+          repository: your_github_name/repository_name
+          cookie: ${{ secrets.GITEE_COOKIE }}
+          branch: master
+          directory: src
+          https: true
