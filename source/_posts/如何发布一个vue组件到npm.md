@@ -145,6 +145,13 @@ module.exports = {
 npm i --save-dev vuepress
 ```
 
+在`package.json`的`scripts`中增加
+
+```sh
+    "docs:dev": "npx vuepress dev docs",
+    "docs:build": "npx vuepress build docs",
+```
+
 #### 创建文件夹和配置文件
 
 在根目录创建`docs`以后文档都会在这个目录底下，同时我们在`docs`下创建`.vuepress`文件夹
@@ -373,4 +380,10 @@ jobs:
 
 ```
 
-这样，一个自动工作的`vue`库文件开发工作流就完成了，剩下的就是开发啦
+这样，一个自动工作的`vue`库文件开发工作流就完成啦，愉快的开发吧
+
+## 还有一件事
+
+如何快速打`tag`?利用`npm version {版本类型}`即可
+
+如果在`package.json`的`scripts`中增加`"postversion": "git push --follow-tags"`甚至连发布工作都会自动帮你做掉，还等什么呢！
