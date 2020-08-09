@@ -7,6 +7,8 @@ categories: 可以公开的情报
 
 # 如何发布一个vue组件到npm
 
+![head](https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png)
+
 如今做`vue`的相关开发，基本都离不开[vue-cli](https://cli.vuejs.org/)，有时候，我们也会将自己工作中抽象出来的优秀方法或者组件发布给外网进行使用，本文基于自身写的[seed组件系统](https://www.mizuka.top/seed/)整理一下如何自动化发布到`npm`的一个流程
 
 ## 一些前期准备
